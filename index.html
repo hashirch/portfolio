@@ -1,666 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Character-set Metadata -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Viewport Metadata -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Description Metadata -->
-    <meta
-      name="description"
-      content="Muhammad Hashir — Python Developer, ML Engineer & Full-Stack Builder. Explore my portfolio showcasing projects in AI, cybersecurity, and web development."
-    />
-    <!-- Author Metadata -->
-    <meta name="author" content="Muhammad Hashir" />
-    <!-- Keyword Metadata -->
-    <meta
-      name="keywords"
-      content="Muhammad Hashir, Hashir Chaudhary, Python Developer, Machine Learning, Full Stack Developer, FAST NUCES, Computer Science, Portfolio"
-    />
-    <!-- Open Graph -->
-    <meta property="og:title" content="Muhammad Hashir — Portfolio" />
-    <meta
-      property="og:description"
-      content="Python Developer, ML Engineer & Full-Stack Builder"
-    />
-    <meta property="og:type" content="website" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Hashir — Graphic Designer & Visual Creative | Portfolio</title>
+  <meta name="description" content="Portfolio of Muhammad Hashir, Graphic Designer and Visual Creative specializing in esports key art, festival branding, large-format print, social media campaigns, and visual identities.">
+  <meta name="keywords" content="Muhammad Hashir, Graphic Designer, Visual Creative, Portfolio, Esports Design, Event Branding, FAST NUCES, Poster Design, Digital Campaigns">
+  <meta name="author" content="Muhammad Hashir">
 
-    <!-- Webpage Title -->
-    <title>Muhammad Hashir — Portfolio</title>
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="Muhammad Hashir — Graphic Designer & Visual Creative">
+  <meta property="og:description" content="Explore bold visual identities, esports key art, festival experiences, and digital campaigns crafted by Muhammad Hashir.">
+  <meta property="og:type" content="website">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-    <!-- Devicons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
-    />
+  <!-- Ambient Dynamic Glows -->
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
 
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="./assets/css/main.css" />
-  </head>
 
-  <body>
-    <!-- ============================================
-         HERO SECTION with Particle Background
-         ============================================ -->
-    <div id="particles-js">
-      <div class="header">
-        <h1>
-          <span class="site-title">MUHAMMAD HASHIR</span>
-          <span class="site-description"
-            >Python Developer • ML Engineer • Full-Stack Builder</span
-          >
-        </h1>
-        <div class="header-icons">
-          <a
-            aria-label="My LinkedIn Profile"
-            target="_blank"
-            href="https://linkedin.com/in/muhammad-hashir-chaudhary"
-            id="linkedin-link"
-          >
-            <i class="icon fa fa-linkedin" aria-hidden="true"></i>
-          </a>
-          <a
-            aria-label="My Github Profile"
-            target="_blank"
-            href="https://github.com/hashirch"
-            id="github-link"
-          >
-            <i class="icon fa fa-github-alt" aria-hidden="true"></i>
-          </a>
-          <a
-            aria-label="Send Email"
-            href="mailto:hashirchbss@gmail.com"
-            target="_blank"
-            id="email-link"
-          >
-            <i class="icon fa fa-envelope" aria-hidden="true"></i>
-          </a>
-          <a
-            aria-label="Call Me"
-            href="tel:+923322226955"
-            id="phone-link"
-          >
-            <i class="icon fa fa-phone" aria-hidden="true"></i>
-          </a>
+
+  <main>
+    <!-- ------------------------------------------------------------------------
+         Hero Section — Full-Screen Landing
+         ------------------------------------------------------------------------ -->
+    <section id="hero" style="
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    ">
+      <!-- Full-screen image -->
+      <img
+        src="Graphic_designer_portfolio_poste…_2K_202608210318.jpeg"
+        alt="Muhammad Hashir — Graphic Designer Portfolio"
+        style="
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        "
+      >
+
+      <!-- Scroll-down arrow -->
+      <a href="#work" style="
+        position: absolute;
+        bottom: 28px;
+        right: 40px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255,255,255,0.7);
+        font-size: 0.75rem;
+        font-family: var(--font-mono);
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        animation: bounceDown 2s ease-in-out infinite;
+      ">
+        <span>SCROLL</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </section>
+
+    <style>
+      @keyframes bounceDown {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(8px); }
+      }
+    </style>
+
+
+    <!-- ------------------------------------------------------------------------
+         Selected Work Section
+         ------------------------------------------------------------------------ -->
+    <section class="section-spacing" id="work">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-eyebrow">Portfolio Showcase</span>
+          <h2 class="section-title">Selected Design Projects</h2>
         </div>
-        <div class="header-links">
-          <a class="link" href="#about" data-scroll>About</a>
-          <a class="link" href="#experience" data-scroll>Experience</a>
-          <a class="link" href="#projects" data-scroll>Projects</a>
-          <a class="link" href="#skills" data-scroll>Skills</a>
-          <a class="link" href="#education" data-scroll>Education</a>
+
+        <!-- Filter Controls -->
+        <div class="filter-container">
+          <button class="filter-btn active" data-filter="all">All Projects (7)</button>
+          <button class="filter-btn" data-filter="esports">Esports & Gaming</button>
+          <button class="filter-btn" data-filter="festivals">Festivals & Concerts</button>
+          <button class="filter-btn" data-filter="tech">Tech & Hackathons</button>
+          <button class="filter-btn" data-filter="automotive">Automotive Culture</button>
+          <button class="filter-btn" data-filter="commercial">Commercial & B2B</button>
+          <button class="filter-btn" data-filter="motion">Motion & Video</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projectsGrid">
+
+          <!-- Card 1: NUTEC -->
+          <article class="project-card" data-category="festivals branding social">
+            <div class="card-media-wrapper" data-open-case="nutec">
+              <img src="NUTEC/5th May, 2024.png" alt="NUTEC Olympiad Visual Identity" class="card-img" loading="lazy">
+              <div class="media-badge">
+                <svg viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/></svg>
+                <span>9 Assets</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <span class="card-org-tag">NUTEC / FAST NUCES Peshawar</span>
+              <h3 class="card-title">NUTEC '24 & '25 — Olympiad Visual Identity</h3>
+              <p class="card-desc">
+                Headline concert key art (Mustafa Zahid Live), official concert passes, ripped-paper collages, retro-pop teaser carousels, and outdoor highway billboard mockups.
+              </p>
+              <div class="card-tags">
+                <span class="pill-tag">Concert Key Art</span>
+                <span class="pill-tag">VIP Passes</span>
+                <span class="pill-tag">3-Panel Carousel</span>
+                <span class="pill-tag">Billboard</span>
+              </div>
+              <div class="card-footer">
+                <a href="#" class="btn-card-action" data-open-case="nutec">
+                  <span>View</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <button class="btn-card-preview" data-quick-preview="nutec">Quick Gallery</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: E-Gaming Society -->
+          <article class="project-card" data-category="esports branding social motion">
+            <div class="card-media-wrapper" data-open-case="egaming">
+              <img src="E-gaming Society/1d3 (1).png" alt="E-Gaming Society & Ramadan Series" class="card-img" loading="lazy">
+              <div class="media-badge">
+                <svg viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/></svg>
+                <span>15 Assets + Video</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <span class="card-org-tag">FAST E-Gaming Society</span>
+              <h3 class="card-title">E-Gaming Society</h3>
+              <p class="card-desc">
+                Unified 5-piece character rollup banner suite (Tekken 8, Valorant, FC 24, PUBG), 12ft+ championship stage backdrops, 3D laptop portal teaser, pop-art recruitment carousels, and motion video teaser.
+              </p>
+              <div class="card-tags">
+                <span class="pill-tag">Esports Banners</span>
+                <span class="pill-tag">Stage Backdrops</span>
+                <span class="pill-tag">Motion Video</span>
+                <span class="pill-tag">Pop-Art</span>
+              </div>
+              <div class="card-footer">
+                <a href="#" class="btn-card-action" data-open-case="egaming">
+                  <span>View</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <button class="btn-card-preview" data-quick-preview="egaming">Quick Gallery</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: METAL Society -->
+          <article class="project-card" data-category="automotive festivals branding">
+            <div class="card-media-wrapper" data-open-case="metal">
+              <img src="METAL/1.png" alt="METAL Society Automotive Key Art" class="card-img" loading="lazy">
+              <div class="media-badge">
+                <svg viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/></svg>
+                <span>5 Assets</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <span class="card-org-tag">METAL (Music, Entertainment & Auto)</span>
+              <h3 class="card-title">METAL Society</h3>
+              <p class="card-desc">
+                Personalized JDM Car Show VIP invitation posters (tuned red Chaser & black Mazda RX-7 in vortex lighting tunnel), retrowave Campus Fest key visual (AE86 & speaker wall), and participant certificates.
+              </p>
+              <div class="card-tags">
+                <span class="pill-tag">VIP Invitation</span>
+                <span class="pill-tag">Retrowave</span>
+                <span class="pill-tag">Automotive Art</span>
+                <span class="pill-tag">Certificates</span>
+              </div>
+              <div class="card-footer">
+                <a href="#" class="btn-card-action" data-open-case="metal">
+                  <span>View</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <button class="btn-card-preview" data-quick-preview="metal">Quick Gallery</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: GDSC -->
+          <article class="project-card" data-category="tech social branding">
+            <div class="card-media-wrapper" data-open-case="gdsc">
+              <img src="GDSC/ce (1).png" alt="Google Developer Student Clubs & DevFest" class="card-img" loading="lazy">
+              <div class="media-badge">
+                <svg viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/></svg>
+                <span>5 Assets</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <span class="card-org-tag">GDSC / GDG Peshawar / Google</span>
+              <h3 class="card-title">Google Developer Student Clubs & DevFest</h3>
+              <p class="card-desc">
+                AI NEXUS 3-panel cyber-grid event banners (cyan and ultraviolet neon with 3D robots), official Google DevFest 2023 3-panel campaign, and GSoC founder speaker spotlight cards.
+              </p>
+              <div class="card-tags">
+                <span class="pill-tag">3D Robot Staging</span>
+                <span class="pill-tag">Google DevFest</span>
+                <span class="pill-tag">Cyber Grids</span>
+                <span class="pill-tag">Polaroid UI</span>
+              </div>
+              <div class="card-footer">
+                <a href="#" class="btn-card-action" data-open-case="gdsc">
+                  <span>View</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <button class="btn-card-preview" data-quick-preview="gdsc">Quick Gallery</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5: Jade Cafe -->
+          <article class="project-card" data-category="commercial social motion">
+            <div class="card-media-wrapper" data-open-case="jadecafe">
+              <img src="Jade Cafe China Town/ee.png" alt="Jade Café & China Town Campaign" class="card-img" loading="lazy">
+              <div class="media-badge">
+                <svg viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/></svg>
+                <span>2 Assets + Video</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <span class="card-org-tag">Jade Café & China Town</span>
+              <h3 class="card-title">Jade Café & China Town</h3>
+              <p class="card-desc">
+                High-energy 3-panel social menu carousel highlighting signature espresso, caramel latte, and croissants on dual-tone teal/tangerine canvas, plus promotional food video commercial.
+              </p>
+              <div class="card-tags">
+                <span class="pill-tag">F&B Branding</span>
+                <span class="pill-tag">Dual-Tone Pop</span>
+                <span class="pill-tag">Social Carousel</span>
+                <span class="pill-tag">Video Promo</span>
+              </div>
+              <div class="card-footer">
+                <a href="#" class="btn-card-action" data-open-case="jadecafe">
+                  <span>View</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <button class="btn-card-preview" data-quick-preview="jadecafe">Quick Gallery</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6: FAST NUCES Institutional -->
+          <article class="project-card" data-category="tech branding">
+            <div class="card-media-wrapper" data-open-case="fast">
+              <img src="FAST/Dark Blue and Green Modern Illustrative Coding Club Poster.png" alt="FAST NUCES Institutional Design" class="card-img" loading="lazy">
+              <div class="media-badge">
+                <svg viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/></svg>
+                <span>3 Assets</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <span class="card-org-tag">FAST NUCES Peshawar</span>
+              <h3 class="card-title">FAST NUCES</h3>
+              <p class="card-desc">
+                FPSC Competitive Programming (PKR 100,000 Prize Pool) poster with illustrated futuristic characters, Code Clash retro computing flyer, and Class of 2020 collegiate emblem.
+              </p>
+              <div class="card-tags">
+                <span class="pill-tag">Illustrated Poster</span>
+                <span class="pill-tag">Tech Competitions</span>
+                <span class="pill-tag">Collegiate Emblem</span>
+              </div>
+              <div class="card-footer">
+                <a href="#" class="btn-card-action" data-open-case="fast">
+                  <span>View</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <button class="btn-card-preview" data-quick-preview="fast">Quick Gallery</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 7: Mintwurks -->
+          <article class="project-card" data-category="commercial branding">
+            <div class="card-media-wrapper" data-open-case="mintwurks">
+              <img src="Mintwurks/Untitled desin.png" alt="Mintwurks Energy B2B Branding" class="card-img" loading="lazy">
+              <div class="media-badge">
+                <svg viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/></svg>
+                <span>4 Assets</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <span class="card-org-tag">Mintwurks Elite Experience</span>
+              <h3 class="card-title">Mintwurks Energy — B2B Corporate Branding</h3>
+              <p class="card-desc">
+                Clean corporate identity collateral, supply volume infographics (2.5B MTs supplied), petroleum commodity sheets, and vector oil derrick illustrations in deep slate indigo and seafoam mint.
+              </p>
+              <div class="card-tags">
+                <span class="pill-tag">B2B Corporate</span>
+                <span class="pill-tag">Vector Infographics</span>
+                <span class="pill-tag">Brand Collateral</span>
+              </div>
+              <div class="card-footer">
+                <a href="#" class="btn-card-action" data-open-case="mintwurks">
+                  <span>View</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <button class="btn-card-preview" data-quick-preview="mintwurks">Quick Gallery</button>
+              </div>
+            </div>
+          </article>
+
         </div>
       </div>
-      <a class="down" href="#about" data-scroll
-        ><i class="icon fa fa-chevron-down" aria-hidden="true"></i
-      ></a>
+    </section>
+
+
+
+    <!-- ------------------------------------------------------------------------
+         Contact / Collaboration Section
+         ------------------------------------------------------------------------ -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        
+        <div class="contact-card">
+          <div class="contact-stamp-wrap">
+            <span class="contact-stamp">GET IN TOUCH</span>
+          </div>
+          <h2 class="contact-title">Have a project in mind?<br><span class="text-highlight">Let's create something bold.</span></h2>
+          <p class="contact-subtitle">
+            Open for event branding and visual identity projects.
+          </p>
+
+          <div class="contact-actions">
+            <a href="https://mail.google.com/mail/?view=cm&to=hashirchbss@gmail.com" target="_blank" rel="noopener noreferrer" class="btn-primary" id="btnEmailDirect">
+              <span>Send An Email</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+            <button class="btn-secondary" id="btnCopyEmail" data-email="hashirchbss@gmail.com">
+              <span>Copy Email Address</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+
+          <!-- Society Portfolios & Handles -->
+          <div class="contact-meta-links">
+            <span class="meta-label">Featured Organizations:</span>
+            <span class="org-tag-link">@nutec_pwr</span>
+            <span class="org-tag-link">@egamingatfastpwr</span>
+            <span class="org-tag-link">@metal.pwr</span>
+            <span class="org-tag-link">@gdgocfastpwr</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+
+
+  <!-- ------------------------------------------------------------------------
+       Case Study Drawer / Modal
+       ------------------------------------------------------------------------ -->
+  <div class="case-modal" id="caseModal" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="case-drawer">
+
+      <!-- Drawer Header -->
+      <div class="drawer-header">
+        <div class="drawer-title-wrap">
+          <span class="drawer-org-tag" id="drawerOrgTag">Organization Name</span>
+          <h2 class="drawer-title" id="drawerTitle">Project Title</h2>
+        </div>
+        <button class="btn-close-drawer" id="btnCloseDrawer" aria-label="Close Case Study">✕</button>
+      </div>
+
+      <!-- Drawer Content — Gallery Only -->
+      <div class="drawer-content">
+        <div class="case-gallery-grid" id="drawerGalleryGrid"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------------
+       Fullscreen Lightbox Modal
+       ------------------------------------------------------------------------ -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Artwork Fullscreen View">
+    
+    <div class="lightbox-toolbar">
+      <div class="lightbox-info">
+        <h4 class="lightbox-title" id="lightboxTitle">Artwork Title</h4>
+        <span class="lightbox-counter" id="lightboxCounter">1 / 1</span>
+      </div>
+      <div class="lightbox-actions">
+        <button class="lightbox-btn" id="btnCloseLightbox" aria-label="Close Lightbox">✕</button>
+      </div>
     </div>
 
-    <!-- ============================================
-         ABOUT SECTION
-         ============================================ -->
-    <section id="about">
-      <div class="user-details reveal">
-        <h1>My Story</h1>
-        <div class="profile-img-wrapper">
-          <img
-            class="profile-img"
-            src="./assets/img/profile.png"
-            alt="Muhammad Hashir"
-          />
-        </div>
-        <p>
-          I am a Software Engineer and Computer Science student at
-          <strong>FAST National University</strong> (NUCES), Peshawar, specializing in Python, C#, and Machine Learning, with a proven track record of building scalable enterprise applications, cross-platform solutions, and production-grade ML pipelines. Adept at leveraging Clean Architecture, designing RESTful APIs, and driving Agile methodologies to deliver high-impact technical solutions. I also love giving back as a Teaching Assistant, mentoring 150+ students, and leading campus communities as President of the E-Gaming Society.
-        </p>
+    <div class="lightbox-stage">
+      <button class="lightbox-nav-btn lightbox-prev" id="btnPrevLightbox" aria-label="Previous image">‹</button>
+      
+      <div class="lightbox-media-container" id="lightboxMediaContainer">
+        <!-- Dynamic img or video injected via app.js -->
       </div>
 
-      <!-- Technology Stacks -->
-      <div class="user stagger-children">
-        <!-- Languages -->
-        <div class="tech">
-          <h2>Languages</h2>
-          <i class="devicon-python-plain colored"></i>
-          <i class="devicon-cplusplus-plain colored"></i>
-          <i class="devicon-javascript-plain colored"></i>
-          <i class="devicon-c-plain colored"></i>
-          <p>
-            My go-to languages for systems programming, ML engineering, and
-            full-stack development.
-          </p>
-        </div>
+      <button class="lightbox-nav-btn lightbox-next" id="btnNextLightbox" aria-label="Next image">›</button>
+    </div>
 
-        <!-- Backend -->
-        <div class="tech">
-          <h2>Back-End</h2>
-          <i class="devicon-django-plain colored"></i>
-          <i class="devicon-flask-original colored"></i>
-          <i class="devicon-fastapi-plain colored"></i>
-          <i class="devicon-nodejs-plain colored"></i>
-          <p>
-            My preferred frameworks for building robust APIs and
-            server-side applications.
-          </p>
-        </div>
+  </div>
 
-        <!-- ML & AI -->
-        <div class="tech">
-          <h2>ML &amp; AI</h2>
-          <i class="devicon-tensorflow-original colored"></i>
-          <i class="devicon-keras-plain colored" style="color: #d00000"></i>
-          <i class="devicon-pandas-original colored"></i>
-          <i class="devicon-numpy-original colored"></i>
-          <p>
-            Deep learning, NLP, and data science tools I use to build
-            intelligent systems.
-          </p>
-        </div>
+  <!-- Toast Notification -->
+  <div class="toast-notice" id="toastNotice">
+    <span style="color:var(--accent-emerald)">✓</span>
+    <span class="toast-text">Notification message</span>
+  </div>
 
-        <!-- Tools -->
-        <div class="tech">
-          <h2>Tools</h2>
-          <i class="devicon-git-plain colored"></i>
-          <i class="devicon-docker-plain colored"></i>
-          <i class="devicon-github-original colored" style="color: #e8e8f0"></i>
-          <i class="devicon-linux-plain colored" style="color: #e8e8f0"></i>
-          <p>
-            Version control, containerization, and Linux environments I work
-            with daily.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         EXPERIENCE SECTION
-         ============================================ -->
-    <section id="experience">
-      <div class="user-details">
-        <h1>Professional Experience</h1>
-        <p style="max-width: 600px; margin: 0 auto 50px; color: #a0a0b8; font-size: 1.1rem">
-          Real-world engineering & teaching roles that shaped my craft.
-        </p>
-      </div>
-
-      <div class="timeline">
-        <!-- Experience 1: TA -->
-        <div class="timeline-item reveal-left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">Sep 2024 – May 2025</span>
-            <h3 class="timeline-title">Teaching Assistant — DSA</h3>
-            <p class="timeline-company">NUCES - FAST</p>
-            <p class="timeline-location">📍 Peshawar, Pakistan</p>
-            <ul>
-              <li>
-                Mentored 150+ undergraduate students across core Computer Science courses, achieving a 95% student satisfaction rating.
-              </li>
-              <li>
-                Conducted weekly laboratory sessions, successfully resolving 50+ technical queries on algorithms, data structures, and advanced programming concepts.
-              </li>
-              <li>
-                Evaluated coursework for 3 concurrent courses and engineered supplementary coding exercises to enhance student comprehension.
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Experience 2: Python Developer Intern -->
-        <div class="timeline-item reveal-right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">Jun 2024 – Jul 2024</span>
-            <h3 class="timeline-title">Python Developer Intern</h3>
-            <p class="timeline-company">Osoltech</p>
-            <p class="timeline-location">📍 Lahore, Pakistan</p>
-            <ul>
-              <li>
-                Automated manual workflows by developing Python scripts for file handling and data parsing, significantly improving operational efficiency.
-              </li>
-              <li>
-                Integrated third-party RESTful APIs using Python and JSON parsing, implementing robust error handling mechanisms.
-              </li>
-              <li>
-                Implemented Test-Driven Development (TDD) by writing comprehensive unit tests using unittest and pytest, ensuring high code reliability.
-              </li>
-              <li>
-                Collaborated in Agile sprint meetings and peer code reviews, leveraging Git workflows for version control and continuous integration.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         PROJECTS SECTION
-         ============================================ -->
-    <section id="projects">
-      <div class="user-details">
-        <h1>Featured Projects</h1>
-        <p style="max-width: 600px; margin: 0 auto 50px; color: #a0a0b8; font-size: 1.1rem">
-          A selection of projects that showcase my engineering depth.
-        </p>
-      </div>
-
-      <!-- Project 1: PCOS Tracker -->
-      <div class="user-projects reveal">
-        <div class="images-right">
-          <img src="./assets/img/project-pcos.png" alt="Ovula – PCOS Tracker & AI Healthcare Assistant" />
-        </div>
-        <div class="contents" style="text-align: center">
-          <h3>Ovula – PCOS Tracker &amp; AI Healthcare Assistant</h3>
-          <div class="tech-badges">
-            <span class="tech-badge">React</span>
-            <span class="tech-badge">CapacitorJS</span>
-            <span class="tech-badge">Kotlin</span>
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">FastAPI</span>
-            <span class="tech-badge">LLM</span>
-          </div>
-          <p style="text-align: justify">
-            Developed an AI-powered clinical decision system classifying PCOS risk with 87% accuracy using ensemble machine learning. Built a cross-platform mobile/web application using React and CapacitorJS, supported by Android native Kotlin modules. Implemented an asynchronous FastAPI backend integrated with a fine-tuned LLM conversational voice assistant for symptom logging and user consultation; designed a HIPAA-compliant encrypted storage architecture.
-          </p>
-          <span class="tech-badge" style="color: #fdcb6e; border-color: rgba(253, 203, 110, 0.3)">
-            🎓 Final Year Project
-          </span>
-          <div style="margin-top: 16px">
-            <a class="project-link" target="_blank" href="https://github.com/hashirch/ovula-pcos-tracker-FYP-Project">View on GitHub →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 2: SUMS -->
-      <div class="user-projects reveal">
-        <div class="images-left">
-          <img src="./assets/img/project-sums.png" alt="Smart University Management System (SUMS)" />
-        </div>
-        <div class="contents-right" style="text-align: center">
-          <h3>Smart University Management System (SUMS)</h3>
-          <div class="tech-badges">
-            <span class="tech-badge">C#</span>
-            <span class="tech-badge">ASP.NET Core</span>
-            <span class="tech-badge">EF Core</span>
-            <span class="tech-badge">xUnit</span>
-            <span class="tech-badge">JWT</span>
-          </div>
-          <p style="text-align: justify">
-            Engineered an enterprise-grade ERP system implementing Clean Architecture to decouple domain business rules from infrastructure dependencies. Built a dynamic QR code check-in attendance system featuring automatic anti-duplicate and time-expiry validations. Designed automated state-machines for priority waitlist promotions and multi-tier academic petition workflow approvals. Developed comprehensive test suites with 47 test cases.
-          </p>
-          <span class="tech-badge" style="color: #00cec9; border-color: rgba(0, 206, 201, 0.3)">
-            🏢 Academic / Enterprise ERP
-          </span>
-          <div style="margin-top: 16px">
-            <a class="project-link" target="_blank" href="https://github.com/hashirch/.net-Smart-University-Management-System-SUMS">View on GitHub →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 3: PhishShield-XAI -->
-      <div class="user-projects reveal">
-        <div class="images-right">
-          <img src="./assets/img/project-phishield.png" alt="PhishShield-XAI Phishing Detection Platform" />
-        </div>
-        <div class="contents" style="text-align: center">
-          <h3>PhishShield-XAI</h3>
-          <div class="tech-badges">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">FastAPI</span>
-            <span class="tech-badge">XGBoost</span>
-            <span class="tech-badge">SHAP</span>
-            <span class="tech-badge">LIME</span>
-          </div>
-          <p style="text-align: justify">
-            Built a secure, adversarial-resistant phishing detection platform achieving sub-50ms inference via FastAPI; trained on 1,000+ adversarial samples. Integrated SHAP and LIME for global and token-level model explainability; built an arms race simulator for evading heuristic checks.
-          </p>
-          <a class="project-link" target="_blank" href="https://github.com/hashirch/PhishShield-XAI">View on GitHub →</a>
-        </div>
-      </div>
-
-      <!-- Project 4: Credit Risk ML Pipeline -->
-      <div class="user-projects reveal">
-        <div class="images-left">
-          <img src="./assets/img/project-creditrisk.png" alt="Credit Risk Machine Learning Pipeline" />
-        </div>
-        <div class="contents-right" style="text-align: center">
-          <h3>Credit Risk ML Pipeline</h3>
-          <div class="tech-badges">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">Scikit-learn</span>
-            <span class="tech-badge">Joblib</span>
-            <span class="tech-badge">Pandas</span>
-          </div>
-          <p style="text-align: justify">
-            Engineered a modular, production-grade machine learning pipeline automating data preprocessing, cleaning, and feature engineering. Optimized Logistic Regression, Decision Trees, and Random Forests, serializing models and feature names using Joblib for rapid deployment.
-          </p>
-          <a class="project-link" target="_blank" href="https://github.com/hashirch/Credit-Risk-Machine-Learning-Pipeline">View on GitHub →</a>
-        </div>
-      </div>
-
-      <!-- Project 5: Speech Emotion Recognition -->
-      <div class="user-projects reveal">
-        <div class="images-right">
-          <img src="./assets/img/project-speechemotion.png" alt="Speech Emotion Recognition Deep Learning Pipeline" />
-        </div>
-        <div class="contents" style="text-align: center">
-          <h3>Speech Emotion Recognition</h3>
-          <div class="tech-badges">
-            <span class="tech-badge">TensorFlow</span>
-            <span class="tech-badge">Keras</span>
-            <span class="tech-badge">Librosa</span>
-            <span class="tech-badge">CNN</span>
-            <span class="tech-badge">LSTM</span>
-          </div>
-          <p style="text-align: justify">
-            Designed an end-to-end deep learning pipeline to extract and accurately classify human emotions from raw speech audio data. Extracted MFCCs, Chroma, and Mel Spectrogram audio features utilizing Librosa, training a robust hybrid CNN-LSTM neural network.
-          </p>
-          <a class="project-link" target="_blank" href="https://github.com/hashirch/Speech-Emotion-Recognition-Deep-Learning-Pipeline">View on GitHub →</a>
-        </div>
-      </div>
-
-      <div class="user-details" style="margin-top: 100px;">
-        <h1>Other Open Source Projects</h1>
-      </div>
-      <div class="other-projects-grid stagger-children" style="margin-bottom: 60px;">
-        <div class="other-project-card">
-          <h3>Fitness Guru</h3>
-          <p>Full-stack web application for health and workout tracking with custom BMI/BMR analytics and RESTful API endpoints using Flask and MongoDB.</p>
-          <a href="https://github.com/hashirch/fitness-Guru-Advanced-Gym-Tracker" target="_blank">View on GitHub →</a>
-        </div>
-        <div class="other-project-card">
-          <h3>php-student-manager</h3>
-          <p>A comprehensive PHP CRUD application for managing student records with advanced search, filter, and sort functionality.</p>
-          <a href="https://github.com/hashirch/php-student-manager" target="_blank">View on GitHub →</a>
-        </div>
-        <div class="other-project-card">
-          <h3>book-request-system</h3>
-          <p>A web-based system to request books, track requests, and manage inventory seamlessly using PHP and MySQL.</p>
-          <a href="https://github.com/hashirch/book-request-system" target="_blank">View on GitHub →</a>
-        </div>
-        <div class="other-project-card">
-          <h3>Iris Species Classification</h3>
-          <p>A classic machine learning project implementing multi-class classification to predict Iris species based on sepal and petal measurements.</p>
-          <a href="https://github.com/hashirch/Iris-Species-Classification-ML" target="_blank">View on GitHub →</a>
-        </div>
-        <div class="other-project-card">
-          <h3>Unemployment Trends Analysis</h3>
-          <p>A data science project involving exploratory data analysis and visualization to understand regional unemployment trends.</p>
-          <a href="https://github.com/hashirch/Comprehensive-Analysis-of-Unemployment-Trends-" target="_blank">View on GitHub →</a>
-        </div>
-        <div class="other-project-card">
-          <h3>sticky-notes</h3>
-          <p>A clean, lightweight web application built with Django for creating, managing, and organizing digital sticky notes.</p>
-          <a href="https://github.com/hashirch/sticky-notes" target="_blank">View on GitHub →</a>
-        </div>
-        <div class="other-project-card">
-          <h3>web-development-fundamentals</h3>
-          <p>A comprehensive repository demonstrating core web development concepts across semantic HTML, CSS, and vanilla JavaScript.</p>
-          <a href="https://github.com/hashirch/web-development-fundamentals" target="_blank">View on GitHub →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         SKILLS SECTION
-         ============================================ -->
-    <section id="skills">
-      <div class="user-details">
-        <h1>Technical Skills</h1>
-        <p style="max-width: 600px; margin: 0 auto 50px; color: #a0a0b8; font-size: 1.1rem">
-          Technologies and tools I've worked with extensively.
-        </p>
-      </div>
-
-      <div class="skills-grid stagger-children">
-        <div class="skill-category">
-          <h3><span class="cat-icon">💻</span> Languages</h3>
-          <div class="skill-tags">
-            <span class="skill-tag"><i class="devicon-python-plain colored"></i> Python</span>
-            <span class="skill-tag"><i class="devicon-csharp-plain colored"></i> C#</span>
-            <span class="skill-tag"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
-            <span class="skill-tag"><i class="devicon-php-plain colored"></i> PHP</span>
-            <span class="skill-tag"><i class="devicon-c-plain colored"></i> C/C++</span>
-            <span class="skill-tag"><i class="devicon-bash-plain" style="color:#4EAA25"></i> Bash</span>
-            <span class="skill-tag"><i class="devicon-mysql-plain"></i> SQL</span>
-            <span class="skill-tag"><i class="devicon-html5-plain colored"></i> HTML</span>
-            <span class="skill-tag"><i class="devicon-css3-plain colored"></i> CSS</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3><span class="cat-icon">🗄️</span> Databases &amp; ORMs</h3>
-          <div class="skill-tags">
-            <span class="skill-tag"><i class="devicon-microsoftsqlserver-plain colored"></i> SQL Server</span>
-            <span class="skill-tag"><i class="devicon-sqlite-plain colored"></i> SQLite</span>
-            <span class="skill-tag"><i class="devicon-mysql-plain colored"></i> MySQL</span>
-            <span class="skill-tag"><i class="devicon-mongodb-plain colored"></i> MongoDB</span>
-            <span class="skill-tag"><i class="devicon-dot-net-plain colored"></i> EF Core</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3><span class="cat-icon">🌐</span> Web Tech &amp; Frameworks</h3>
-          <div class="skill-tags">
-            <span class="skill-tag"><i class="devicon-dotnetcore-plain colored"></i> ASP.NET Core</span>
-            <span class="skill-tag"><i class="devicon-fastapi-plain colored"></i> FastAPI</span>
-            <span class="skill-tag"><i class="devicon-django-plain" style="color:#092E20"></i> Django</span>
-            <span class="skill-tag"><i class="devicon-flask-original" style="color:#e8e8f0"></i> Flask</span>
-            <span class="skill-tag"><i class="devicon-nodejs-plain colored"></i> Node.js</span>
-            <span class="skill-tag"><i class="devicon-react-original colored"></i> React</span>
-            <span class="skill-tag"><i class="devicon-ionic-original colored"></i> CapacitorJS</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3><span class="cat-icon">🤖</span> ML &amp; Data Science</h3>
-          <div class="skill-tags">
-            <span class="skill-tag"><i class="devicon-scikitlearn-plain colored"></i> Scikit-learn</span>
-            <span class="skill-tag"><i class="devicon-tensorflow-original colored"></i> TensorFlow</span>
-            <span class="skill-tag"><i class="devicon-keras-plain" style="color:#D00000"></i> Keras</span>
-            <span class="skill-tag"><i class="devicon-pandas-original colored"></i> Pandas</span>
-            <span class="skill-tag"><i class="devicon-numpy-original colored"></i> NumPy</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">✨</span> SHAP & LIME</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">🎵</span> Librosa</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">🗣️</span> NLP & LLM</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3><span class="cat-icon">🛠️</span> Tools &amp; Cloud</h3>
-          <div class="skill-tags">
-            <span class="skill-tag"><i class="devicon-git-plain colored"></i> Git</span>
-            <span class="skill-tag"><i class="devicon-docker-plain colored"></i> Docker</span>
-            <span class="skill-tag"><i class="devicon-jupyter-plain colored"></i> Jupyter</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">📊</span> Power BI</span>
-            <span class="skill-tag"><i class="devicon-amazonwebservices-original colored"></i> AWS Lex</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">🔌</span> REST APIs</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">🚀</span> CI/CD</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3><span class="cat-icon">📐</span> Methodologies &amp; Architecture</h3>
-          <div class="skill-tags">
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">🏛️</span> Clean Architecture</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">🧪</span> TDD</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">🔄</span> Agile/Scrum</span>
-            <span class="skill-tag"><span class="cat-icon" style="font-size:12px;margin-right:4px;">📦</span> OOP</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         EDUCATION SECTION
-         ============================================ -->
-    <section id="education">
-      <div class="user-details">
-        <h1>Education</h1>
-        <p style="max-width: 600px; margin: 0 auto 50px; color: #a0a0b8; font-size: 1.1rem">
-          Where I built my foundations.
-        </p>
-      </div>
-
-      <div class="education-grid stagger-children">
-        <div class="education-card">
-          <div class="education-icon">🎓</div>
-          <h3>FAST National University of Computer &amp; Emerging Sciences</h3>
-          <p class="degree">Bachelor of Science in Computer Science</p>
-          <div class="edu-meta">
-            <span>2022 – 2026</span>
-            <span>📍 Peshawar, Pakistan</span>
-          </div>
-        </div>
-
-        <div class="education-card">
-          <div class="education-icon">📚</div>
-          <h3>Punjab Group of Colleges</h3>
-          <p class="degree">FSC Pre-Engineering</p>
-          <div class="edu-meta">
-            <span>2020 – 2022</span>
-            <span>📍 Multan, Pakistan</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         LEADERSHIP SECTION
-         ============================================ -->
-    <section id="leadership">
-      <div class="user-details">
-        <h1>Leadership Experience</h1>
-        <p style="max-width: 600px; margin: 0 auto 50px; color: #a0a0b8; font-size: 1.1rem">
-          Driving impact beyond code.
-        </p>
-      </div>
-
-      <div class="leadership-grid stagger-children">
-        <div class="leadership-card">
-          <h3 class="role">President</h3>
-          <p class="org">E-Gaming Society, FAST National University</p>
-          <div class="lead-meta">
-            <span>Sep 2024 – Present</span>
-            <span>📍 Peshawar</span>
-          </div>
-          <ul>
-            <li>
-              Directed a 20+ member cross-functional team to execute 8 campus-wide tournaments, scaling active membership by 40% from 150 to 210 members.
-            </li>
-            <li>
-              Secured PKR 30,000+ in corporate sponsorships, strategically managing budget allocation and vendor relations for large-scale events.
-            </li>
-            <li>
-              Orchestrated end-to-end event logistics and targeted marketing campaigns, successfully attracting 500+ student participants.
-            </li>
-          </ul>
-        </div>
-
-        <div class="leadership-card">
-          <h3 class="role">Head of Media</h3>
-          <p class="org">GDSC (Google Developer Student Clubs), FAST</p>
-          <div class="lead-meta">
-            <span>Sep 2023 – May 2024</span>
-            <span>📍 Peshawar</span>
-          </div>
-          <ul>
-            <li>
-              Led an 8-member media team producing 30+ high-quality event visuals and promotional videos, directly increasing event attendance by 45%.
-            </li>
-            <li>
-              Mentored 5 junior members in Adobe Creative Suite and digital marketing strategies, accelerating team productivity by 35%.
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         CERTIFICATIONS SECTION
-         ============================================ -->
-    <section id="certifications">
-      <div class="user-details">
-        <h1>Certifications &amp; Assessments</h1>
-      </div>
-
-      <div class="cert-card reveal">
-        <div class="cert-item">
-          <div class="cert-icon">🏆</div>
-          <h3>National Skill Competency Test (NSCT)</h3>
-          <p class="cert-score">Score: 57/100 · Percentile: 80.6</p>
-          <p class="cert-meta">April 4, 2026 · Tech Pakistan – HEC Recognized</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         ADDITIONAL INFO SECTION
-         ============================================ -->
-    <section id="additional">
-      <div class="user-details">
-        <h1>More About Me</h1>
-      </div>
-
-      <div class="additional-grid stagger-children">
-        <div class="additional-card">
-          <h3>🌍 Languages</h3>
-          <p>English (Professional) · Urdu (Native)</p>
-        </div>
-        <div class="additional-card">
-          <h3>💡 Interests</h3>
-          <p>
-            ML Research · Open-Source Development · Competitive Programming ·
-            E-Sports Management
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         FOOTER
-         ============================================ -->
-    <footer class="footer">
-      <div class="footer-links">
-        <a
-          href="https://linkedin.com/in/muhammad-hashir-chaudhary"
-          target="_blank"
-          aria-label="LinkedIn"
-          ><i class="fa fa-linkedin"></i
-        ></a>
-        <a
-          href="https://github.com/hashirch"
-          target="_blank"
-          aria-label="GitHub"
-          ><i class="fa fa-github"></i
-        ></a>
-        <a href="mailto:hashirchbss@gmail.com" aria-label="Email"
-          ><i class="fa fa-envelope"></i
-        ></a>
-        <a href="tel:+923322226955" aria-label="Phone"
-          ><i class="fa fa-phone"></i
-        ></a>
-      </div>
-      <p>&copy; 2026 Muhammad Hashir. Crafted with ☕ &amp; code.</p>
-    </footer>
-
-    <!-- Import JS: Particles Theme -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Import JS: Main Script -->
-    <script src="./assets/js/main.js"></script>
-  </body>
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
 </html>
