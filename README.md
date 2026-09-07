@@ -1,3 +1,12 @@
+---
+title: Portfolio Vscode
+emoji: 💜
+colorFrom: purple
+colorTo: indigo
+sdk: static
+pinned: false
+---
+
 # Muhammad Hashir — Interactive Engineering Portfolio
 
 > A high-fidelity, interactive developer portfolio engineered with the design language, tactile interactions, and functional ergonomics of Visual Studio Code. Built to showcase the software engineering, enterprise systems architecture, and applied machine learning work of **Muhammad Hashir** (Software Engineer & BS Computer Science @ FAST NUCES '26).
