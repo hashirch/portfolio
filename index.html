@@ -1277,8 +1277,8 @@
     </div>
   </div>
   <div id="cursor-outer"></div>
-  <div id="cursor-inner"></div>
-
+  <script src="cv-data.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
     /* ═══════════════════════════════════════════════ */
     /*  DATA — MUHAMMAD HASHIR                        */
@@ -2117,19 +2117,19 @@
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
               <button onclick="triggerResumeDownload()" class="btn-primary" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">⬇ Download CV (PDF)</button>
-              <a href="Hashir_cv.pdf" target="_blank" class="btn-outline" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none">Open in New Window ↗</a>
+              <button onclick="openResumeInNewTab()" class="btn-outline" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">Open in New Window ↗</button>
             </div>
           </div>
           
-          <div class="pdf-iframe-container">
-            <iframe src="Hashir_cv.pdf" style="width:100%;height:100%;border:none;" title="Muhammad Hashir Curriculum Vitae"></iframe>
+          <div id="pdf-canvas-wrapper" style="min-height:480px;background:rgba(0,0,0,0.25);border-radius:6px;padding:20px 10px;text-align:center">
+            <div style="color:var(--dim);font-size:13px;padding:30px">Rendering document preview...</div>
           </div>
           
-          <div class="pdf-mobile-fallback">
-            <p style="font-size:13px;color:var(--text);margin-bottom:12px">The integrated PDF viewer is optimized for desktop displays. Use the actions below to open or download the complete curriculum vitae.</p>
+          <div class="pdf-mobile-fallback" style="margin-top:16px">
+            <p style="font-size:13px;color:var(--text);margin-bottom:12px">Use the quick actions below to download or view the complete curriculum vitae document.</p>
             <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-              <a href="Hashir_cv.pdf" target="_blank" class="btn-primary">View Full PDF ↗</a>
-              <button onclick="triggerResumeDownload()" class="btn-outline">Download PDF</button>
+              <button onclick="triggerResumeDownload()" class="btn-primary" style="cursor:pointer">⬇ Download PDF (103.6 KB)</button>
+              <button onclick="openResumeInNewTab()" class="btn-outline" style="cursor:pointer">View Full PDF ↗</button>
             </div>
           </div>
         </div>
@@ -2235,8 +2235,12 @@
       if(mp)mp.textContent=activeFile;
       const mc=document.getElementById("mobile-content");
       if(mc)mc.innerHTML=content;
-      renderStatusBar("mobile-statusbar");
-      requestAnimationFrame(()=>{initReveal();initSkillBars();initTyping()});
+      requestAnimationFrame(()=>{
+        initReveal();
+        initSkillBars();
+        initTyping();
+        if(activeFile==="resume") renderPdfPages();
+      });
     }
     function initTyping(){
       const el=document.getElementById('typing-text');
@@ -2568,6 +2572,76 @@
       if (welcome) welcome.style.display = 'flex';
     }
 
+    function renderPdfPages() {
+      const container = document.getElementById('pdf-canvas-wrapper');
+      if (!container) return;
+      
+      const b64 = window.HASHIR_CV_B64;
+      if (!b64) {
+        container.innerHTML = `<iframe src="Hashir_cv.pdf" style="width:100%;height:800px;border:none;border-radius:4px"></iframe>`;
+        return;
+      }
+      
+      const rawData = atob(b64);
+      const uint8Array = new Uint8Array(rawData.length);
+      for (let i = 0; i < rawData.length; i++) {
+        uint8Array[i] = rawData.charCodeAt(i);
+      }
+      
+      if (typeof pdfjsLib !== 'undefined') {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        pdfjsLib.getDocument({ data: uint8Array }).promise.then(pdf => {
+          container.innerHTML = '';
+          for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            pdf.getPage(pageNum).then(page => {
+              const viewport = page.getViewport({ scale: 1.5 });
+              const canvas = document.createElement('canvas');
+              canvas.style.width = '100%';
+              canvas.style.maxWidth = '850px';
+              canvas.style.height = 'auto';
+              canvas.style.display = 'block';
+              canvas.style.margin = '0 auto 20px auto';
+              canvas.style.boxShadow = '0 10px 35px rgba(0,0,0,0.55)';
+              canvas.style.borderRadius = '6px';
+              canvas.style.background = '#ffffff';
+              
+              const context = canvas.getContext('2d');
+              canvas.height = viewport.height;
+              canvas.width = viewport.width;
+              
+              container.appendChild(canvas);
+              page.render({ canvasContext: context, viewport: viewport });
+            });
+          }
+        }).catch(err => {
+          console.warn('PDF.js canvas fallback:', err);
+          const blob = new Blob([uint8Array], { type: 'application/pdf' });
+          const url = URL.createObjectURL(blob);
+          container.innerHTML = `<iframe src="${url}" style="width:100%;height:800px;border:none;border-radius:4px" title="CV Document"></iframe>`;
+        });
+      } else {
+        const blob = new Blob([uint8Array], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        container.innerHTML = `<iframe src="${url}" style="width:100%;height:800px;border:none;border-radius:4px" title="CV Document"></iframe>`;
+      }
+    }
+
+    function openResumeInNewTab() {
+      const b64 = window.HASHIR_CV_B64;
+      if (b64) {
+        const rawData = atob(b64);
+        const uint8Array = new Uint8Array(rawData.length);
+        for (let i = 0; i < rawData.length; i++) {
+          uint8Array[i] = rawData.charCodeAt(i);
+        }
+        const blob = new Blob([uint8Array], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      } else {
+        window.open('Hashir_cv.pdf', '_blank');
+      }
+    }
+
     function triggerResumeDownload() {
       const pop = document.getElementById('downloads-popover');
       if (pop) {
@@ -2575,35 +2649,47 @@
         setTimeout(() => pop.classList.remove('open'), 4500);
       }
 
-      fetch('Hashir_cv.pdf')
-        .then(res => {
-          if (!res.ok) throw new Error('Network error');
-          return res.blob();
-        })
-        .then(blob => {
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.style.display = 'none';
-          a.href = url;
-          a.download = 'Hashir_cv.pdf';
-          document.body.appendChild(a);
-          a.click();
-          setTimeout(() => {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-          }, 200);
-          showToast('Downloaded: Hashir_cv.pdf');
-        })
-        .catch(() => {
-          const a = document.createElement('a');
-          a.href = 'Hashir_cv.pdf';
-          a.target = '_blank';
-          a.download = 'Hashir_cv.pdf';
-          document.body.appendChild(a);
-          a.click();
+      const b64 = window.HASHIR_CV_B64;
+      if (b64) {
+        const rawData = atob(b64);
+        const uint8Array = new Uint8Array(rawData.length);
+        for (let i = 0; i < rawData.length; i++) {
+          uint8Array[i] = rawData.charCodeAt(i);
+        }
+        const blob = new Blob([uint8Array], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'Hashir_cv.pdf';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
           document.body.removeChild(a);
-          showToast('Opening Hashir_cv.pdf...');
-        });
+          window.URL.revokeObjectURL(url);
+        }, 300);
+        showToast('Downloaded: Hashir_cv.pdf (103.6 KB)');
+      } else {
+        fetch('Hashir_cv.pdf')
+          .then(res => res.blob())
+          .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'Hashir_cv.pdf';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+              document.body.removeChild(a);
+              window.URL.revokeObjectURL(url);
+            }, 300);
+            showToast('Downloaded: Hashir_cv.pdf');
+          })
+          .catch(() => {
+            window.open('Hashir_cv.pdf', '_blank');
+          });
+      }
     }
 
     function askCopilot(q) {
