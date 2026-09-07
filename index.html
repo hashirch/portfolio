@@ -1,0 +1,2759 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Hashir | Software Engineer & Machine Learning Specialist</title>
+  <meta name="description" content="Muhammad Hashir — Software Engineer & Machine Learning Specialist | BS Computer Science @ FAST NUCES | Python, C# (.NET Core), Applied ML, Clean Architecture, Enterprise Systems" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════ */
+    /*  THEME SYSTEM                                  */
+    /* ═══════════════════════════════════════════════ */
+    :root {
+      --bg: #1e1e1e; --bg2: #252526; --bg3: #2d2d2d; --bg4: #333;
+      --title-bg: #1a1a2e; --border: #3c3c3c;
+      --text: #ccc; --dim: #777; --bright: #fff;
+      --accent: #ff6fd8; --blue: #4fc1ff; --blue2: #007acc;
+      --green: #6a9955; --yellow: #dcdcaa; --orange: #ce9178;
+      --purple: #c586c0; --red: #f44747; --teal: #4ec9b0;
+    }
+    [data-theme="nord"] {
+      --bg:#2e3440;--bg2:#3b4252;--bg3:#434c5e;--bg4:#4c566a;
+      --title-bg:#242932;--border:#434c5e;
+      --text:#d8dee9;--dim:#616e88;--bright:#eceff4;
+      --accent:#bf616a;--blue:#81a1c1;--blue2:#5e81ac;
+      --green:#a3be8c;--yellow:#ebcb8b;--orange:#d08770;
+      --purple:#b48ead;--red:#bf616a;--teal:#88c0d0;
+    }
+    [data-theme="catppuccin"] {
+      --bg:#1e1e2e;--bg2:#181825;--bg3:#313244;--bg4:#45475a;
+      --title-bg:#11111b;--border:#45475a;
+      --text:#cdd6f4;--dim:#6c7086;--bright:#cdd6f4;
+      --accent:#f38ba8;--blue:#89dceb;--blue2:#cba6f7;
+      --green:#a6e3a1;--yellow:#f9e2af;--orange:#fab387;
+      --purple:#cba6f7;--red:#f38ba8;--teal:#94e2d5;
+    }
+    [data-theme="tokyo-night"] {
+      --bg:#1a1b26;--bg2:#16161e;--bg3:#1f2335;--bg4:#24283b;
+      --title-bg:#13131c;--border:#292e42;
+      --text:#a9b1d6;--dim:#565f89;--bright:#c0caf5;
+      --accent:#f7768e;--blue:#7dcfff;--blue2:#7aa2f7;
+      --green:#9ece6a;--yellow:#e0af68;--orange:#ff9e64;
+      --purple:#bb9af7;--red:#f7768e;--teal:#73daca;
+    }
+    [data-theme="hashir-dark"], [data-theme="default"] {
+      --bg:#1e1e1e;--bg2:#252526;--bg3:#2d2d2d;--bg4:#333;
+      --title-bg:#1a1a2e;--border:#3c3c3c;
+      --text:#ccc;--dim:#777;--bright:#fff;
+      --accent:#ff6fd8;--blue:#4fc1ff;--blue2:#007acc;
+      --green:#6a9955;--yellow:#dcdcaa;--orange:#ce9178;
+      --purple:#c586c0;--red:#f44747;--teal:#4ec9b0;
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  RESET & BASE                                  */
+    /* ═══════════════════════════════════════════════ */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;overflow:hidden}
+    body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+    input,textarea{font-family:inherit}
+    ul,ol{list-style:none}
+    ::-webkit-scrollbar{width:6px;height:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  APP GRID                                      */
+    /* ═══════════════════════════════════════════════ */
+    .app-grid{
+      display:grid;width:100vw;height:100vh;overflow:hidden;
+      grid-template-rows:30px 22px 1fr 22px;
+      grid-template-columns:48px 220px 1fr 0px;
+      grid-template-areas:"title title title title""menu menu menu menu""act side editor copilot""status status status status";
+      transition:grid-template-columns .2s ease;
+    }
+    .app-grid.sidebar-hidden{grid-template-columns:48px 0px 1fr 0px}
+    .app-grid.copilot-open{grid-template-columns:48px 220px 1fr 340px}
+    .app-grid.sidebar-hidden.copilot-open{grid-template-columns:48px 0px 1fr 340px}
+    .app-grid.sidebar-hidden .sidebar{display:none}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  TITLE BAR                                     */
+    /* ═══════════════════════════════════════════════ */
+    .titlebar{
+      grid-area:title;display:flex;align-items:center;justify-content:space-between;
+      background:var(--title-bg);font-size:11px;color:var(--dim);
+      user-select:none;border-bottom:1px solid var(--border);position:relative;
+      padding:0 12px;height:30px;
+    }
+    .titlebar-left{display:flex;align-items:center;gap:12px;min-width:240px;flex:1}
+    .titlebar-dots{display:flex;align-items:center;gap:6px;cursor:pointer}
+    .titlebar-dot{
+      width:11px;height:11px;border-radius:50%;opacity:1;display:flex;align-items:center;justify-content:center;
+      transition:transform .15s,box-shadow .15s;cursor:pointer;user-select:none;position:relative;
+    }
+    .titlebar-dot.close{background:#ff5f57}
+    .titlebar-dot.min{background:#febc2e}
+    .titlebar-dot.max{background:#28c840}
+    .titlebar-dots:hover .titlebar-dot.close::before{content:'×';font-size:10px;line-height:1;font-weight:900;color:rgba(0,0,0,0.65);position:absolute}
+    .titlebar-dots:hover .titlebar-dot.min::before{content:'−';font-size:10px;line-height:1;font-weight:900;color:rgba(0,0,0,0.65);position:absolute;top:-1px}
+    .titlebar-dots:hover .titlebar-dot.max::before{content:'⤢';font-size:8px;line-height:1;font-weight:900;color:rgba(0,0,0,0.65);position:absolute}
+    .titlebar-dot:active{transform:scale(0.82)}
+    .titlebar-dot.shake{animation:dotShake 0.4s ease}
+    @keyframes dotShake{
+      0%,100%{transform:translateX(0)}
+      20%,60%{transform:translateX(-3px)}
+      40%,80%{transform:translateX(3px)}
+    }
+    .titlebar-easter-egg{
+      font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+      color:#79c0ff;opacity:0;transform:translateX(-6px);transition:opacity .2s ease,transform .2s ease;
+      pointer-events:none;white-space:nowrap;
+    }
+    .titlebar-easter-egg.show{opacity:1;transform:translateX(0)}
+    .titlebar-search{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:2px 14px;background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.1);border-radius:4px;
+      color:var(--dim);font-size:11px;cursor:pointer;
+      transition:all .15s;flex:0 0 auto;
+    }
+    .titlebar-search:hover{
+      background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);color:var(--text);
+    }
+    .titlebar-search .kbd{
+      font-size:9px;background:rgba(255,255,255,.08);padding:1px 4px;border-radius:3px;margin-left:4px;
+    }
+    .titlebar-right{min-width:240px;flex:1}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  MENU BAR                                      */
+    /* ═══════════════════════════════════════════════ */
+    .menubar{
+      grid-area:menu;display:flex;align-items:center;gap:0;
+      background:var(--bg2);border-bottom:1px solid var(--border);
+      padding:0 8px;font-size:12px;color:var(--dim);
+    }
+    .menu-item-wrap{position:relative;display:inline-block}
+    .menu-trigger{padding:2px 8px;border-radius:3px;font-size:12px;transition:background .1s,color .1s;cursor:pointer}
+    .menu-trigger:hover,.menu-trigger.open{background:rgba(255,255,255,.08);color:var(--text)}
+    .menubar button.menu-simple{padding:2px 8px;border-radius:3px;font-size:12px;transition:background .1s,color .1s;cursor:pointer}
+    .menubar button.menu-simple:hover{background:rgba(255,255,255,.08);color:var(--text)}
+
+    /* Dropdown */
+    .menu-dropdown{
+      position:absolute;top:100%;left:0;min-width:210px;
+      background:var(--bg3);border:1px solid var(--border);
+      border-radius:5px;box-shadow:0 8px 30px rgba(0,0,0,.5);
+      padding:4px 0;z-index:5000;display:none;
+      font-size:12px;
+    }
+    .menu-dropdown.open{display:block}
+    .menu-dropdown-item{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:5px 16px 5px 12px;color:var(--dim);
+      cursor:pointer;transition:background .08s,color .08s;
+      border:none;background:none;width:100%;text-align:left;
+      font-family:inherit;font-size:12px;
+    }
+    .menu-dropdown-item:hover{background:rgba(0,122,204,.25);color:var(--bright)}
+    .menu-dropdown-item.active{background:rgba(78,201,176,.18);color:var(--bright)}
+    .menu-dropdown-item.active::after{content:'●';color:var(--accent);font-size:10px;margin-left:auto}
+    .menu-dropdown-item .shortcut{font-size:11px;opacity:.5;margin-left:24px}
+    .menu-dropdown-sep{height:1px;background:var(--border);margin:4px 8px}
+    .menu-dropdown-label{
+      padding:5px 12px;font-size:10px;text-transform:uppercase;
+      letter-spacing:.08em;color:var(--dim);font-weight:600;opacity:.6;
+    }
+
+    /* Embedded Terminal Panel */
+    .terminal-panel{
+      height:160px;background:var(--bg2);border-top:1px solid var(--border);
+      display:none;flex-direction:column;font-size:12px;
+    }
+    .terminal-panel.open{display:flex}
+    .terminal-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:4px 12px;background:var(--bg3);border-bottom:1px solid var(--border);
+      font-size:11px;color:var(--dim);
+    }
+    .terminal-tabs{display:flex;gap:12px;align-items:center}
+    .terminal-tab{color:var(--bright);border-bottom:1px solid var(--accent);padding:2px 0}
+    .terminal-body{
+      flex:1;overflow-y:auto;padding:8px 12px;font-family:'JetBrains Mono',monospace;
+      line-height:1.5;
+    }
+    .term-line{margin-bottom:3px}
+    .term-prompt{color:var(--green)}
+    .term-cmd{color:var(--bright)}
+    .term-out{color:var(--dim)}
+    .term-input-line{display:flex;align-items:center;gap:6px;margin-top:4px}
+    .term-input{
+      flex:1;background:transparent;border:none;outline:none;
+      color:var(--text);font-family:inherit;font-size:12px;
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  ACTIVITY BAR                                  */
+    /* ═══════════════════════════════════════════════ */
+    .activity-bar{
+      grid-area:act;display:flex;flex-direction:column;align-items:center;
+      background:var(--bg2);border-right:1px solid var(--border);
+      padding-top:4px;gap:2px;
+    }
+    .ab-btn{
+      width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+      color:var(--dim);position:relative;transition:color .15s;
+    }
+    .ab-btn:hover{color:var(--bright)}
+    .ab-btn.active{color:var(--bright)}
+    .ab-btn.active::before{
+      content:'';position:absolute;left:0;top:25%;bottom:25%;
+      width:2px;background:var(--bright);border-radius:2px;
+    }
+    .ab-spacer{flex:1}
+    .ab-btn svg{width:22px;height:22px}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  SIDEBAR                                       */
+    /* ═══════════════════════════════════════════════ */
+    .sidebar{
+      grid-area:side;background:var(--bg2);border-right:1px solid var(--border);
+      overflow-y:auto;overflow-x:hidden;font-size:12px;user-select:none;
+      display:flex;flex-direction:column;
+    }
+    .sidebar-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:8px 12px;font-size:10px;text-transform:uppercase;
+      letter-spacing:.12em;color:var(--dim);font-weight:600;
+    }
+    .sidebar-section{padding:2px 0;flex:1}
+    .sidebar-section-title{
+      display:flex;align-items:center;gap:4px;
+      padding:4px 12px;font-size:11px;font-weight:600;
+      text-transform:uppercase;letter-spacing:.06em;
+      color:var(--dim);cursor:pointer;
+    }
+    .sidebar-section-title:hover{color:var(--text)}
+    .sidebar-section-title svg{width:12px;height:12px;flex-shrink:0;transition:transform .15s}
+    .file-item{
+      display:flex;align-items:center;gap:6px;
+      padding:3px 12px 3px 28px;cursor:pointer;
+      color:var(--dim);transition:background .1s,color .1s;font-size:12px;
+    }
+    .file-item:hover{background:rgba(255,255,255,.04);color:var(--text)}
+    .file-item.active{background:rgba(255,255,255,.06);color:var(--bright)}
+    .file-icon{width:14px;height:14px;flex-shrink:0;font-size:13px}
+
+    /* Copilot button in sidebar */
+    .sidebar-copilot{
+      padding:6px 8px;border-top:1px solid var(--border);flex-shrink:0;
+    }
+    .copilot-btn{
+      display:flex;align-items:center;gap:6px;width:100%;
+      padding:5px 8px;border-radius:5px;font-size:11px;
+      background:rgba(110,64,201,.12);border:1px solid rgba(110,64,201,.3);
+      color:var(--dim);transition:all .15s;cursor:pointer;
+    }
+    .copilot-btn:hover{background:rgba(110,64,201,.2);color:var(--text)}
+    .copilot-btn .sparkle{color:#b48eff}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  EDITOR AREA                                   */
+    /* ═══════════════════════════════════════════════ */
+    .editor-area{grid-area:editor;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+
+    /* Tab bar */
+    .tab-bar{
+      display:flex;align-items:stretch;background:var(--bg2);
+      border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0;height:35px;
+    }
+    .tab-bar::-webkit-scrollbar{height:0}
+    .tab{
+      display:flex;align-items:center;gap:6px;
+      padding:0 14px;font-size:12px;color:var(--dim);
+      border-right:1px solid var(--border);
+      cursor:pointer;white-space:nowrap;position:relative;
+      transition:background .1s,color .1s;flex-shrink:0;
+    }
+    .tab:hover{background:rgba(255,255,255,.04)}
+    .tab.active{background:var(--bg);color:var(--text)}
+    .tab.active::after{
+      content:'';position:absolute;top:0;left:0;right:0;
+      height:1px;background:var(--blue2);
+    }
+    .tab-close{
+      width:16px;height:16px;display:flex;align-items:center;justify-content:center;
+      border-radius:3px;opacity:0;font-size:14px;transition:opacity .1s,background .1s;
+    }
+    .tab:hover .tab-close,.tab.active .tab-close{opacity:.6}
+    .tab-close:hover{opacity:1!important;background:rgba(255,255,255,.1)}
+
+    /* Breadcrumb */
+    .breadcrumb{
+      display:flex;align-items:center;gap:4px;
+      padding:4px 16px;font-size:11px;color:var(--dim);
+      border-bottom:1px solid var(--border);flex-shrink:0;background:var(--bg);
+    }
+    .breadcrumb .sep{opacity:.5}
+
+    /* Editor content */
+    .editor-content{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  STATUS BAR                                    */
+    /* ═══════════════════════════════════════════════ */
+    .statusbar{
+      grid-area:status;display:flex;align-items:center;justify-content:space-between;
+      background:var(--blue2);font-size:11px;color:#fff;padding:0 10px;user-select:none;
+    }
+    .statusbar-left,.statusbar-right{display:flex;align-items:center;gap:8px}
+    .sb-item{
+      display:flex;align-items:center;gap:4px;
+      padding:0 6px;height:100%;cursor:pointer;transition:background .1s;
+      white-space:nowrap;
+    }
+    .sb-item:hover{background:rgba(255,255,255,.12)}
+    .sb-item svg{width:13px;height:13px}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  SETTINGS DRAWER POPOVER                       */
+    /* ═══════════════════════════════════════════════ */
+    .settings-popover{
+      position:fixed;bottom:26px;left:48px;width:290px;max-height:85vh;
+      background:var(--bg3);border:1px solid var(--border);
+      border-radius:6px;box-shadow:0 16px 50px rgba(0,0,0,.7);
+      padding:10px;z-index:9000;display:none;flex-direction:column;gap:10px;
+      overflow-y:auto;animation:popFadeIn .15s ease;
+    }
+    .settings-popover.open{display:flex}
+    .settings-header{
+      font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;
+      padding-bottom:4px;border-bottom:1px solid var(--border);
+    }
+    .settings-section{display:flex;flex-direction:column;gap:4px}
+    .settings-section-title{
+      font-size:10px;font-weight:700;color:var(--dim);letter-spacing:.08em;margin-bottom:2px;
+    }
+    .settings-theme-item{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:6px 8px;border-radius:4px;font-size:12px;color:var(--text);cursor:pointer;
+      transition:all .1s;
+    }
+    .settings-theme-item:hover{background:rgba(255,255,255,.07)}
+    .settings-theme-item.active{
+      background:rgba(79,193,255,.15);color:var(--bright);font-weight:500;
+    }
+    .settings-theme-left{display:flex;align-items:center;gap:8px}
+    .settings-theme-dot{width:8px;height:8px;border-radius:50%}
+    .settings-theme-check{color:var(--blue);font-size:12px}
+
+    .settings-action-item{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:6px 8px;border-radius:4px;font-size:11px;color:var(--text);cursor:pointer;
+      background:none;border:none;width:100%;text-align:left;transition:all .1s;
+    }
+    .settings-action-item:hover{background:rgba(255,255,255,.07);color:var(--bright)}
+    .settings-action-key{font-size:10px;color:var(--dim)}
+
+    .settings-shortcuts-list{display:flex;flex-direction:column;gap:4px;padding:2px 0}
+    .settings-shortcut-row{
+      display:flex;align-items:center;gap:10px;font-size:11px;color:var(--dim);
+    }
+    .shortcut-key{
+      font-size:10px;padding:1px 6px;background:rgba(255,255,255,.06);
+      border:1px solid var(--border);border-radius:3px;color:var(--bright);min-width:44px;text-align:center;
+    }
+    .shortcut-desc{font-size:11px;color:var(--dim)}
+
+    .settings-footer{
+      font-size:10px;color:var(--dim);text-align:center;padding-top:8px;border-top:1px solid var(--border);
+      line-height:1.4;opacity:.8;
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  COPILOT SIDE PANEL                            */
+    /* ═══════════════════════════════════════════════ */
+    .copilot-sidepanel{
+      grid-area:copilot;background:var(--bg2);border-left:1px solid var(--border);
+      display:none;flex-direction:column;overflow:hidden;font-size:12px;
+    }
+    .app-grid.copilot-open .copilot-sidepanel{display:flex}
+    .copilot-panel-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:8px 12px;background:var(--bg3);border-bottom:1px solid var(--border);
+      font-size:11px;font-weight:600;color:var(--bright);
+    }
+    .copilot-header-actions{display:flex;align-items:center;gap:6px}
+    .copilot-header-btn{
+      background:none;border:none;color:var(--dim);cursor:pointer;font-size:12px;
+      padding:2px 4px;border-radius:3px;transition:color .1s;
+    }
+    .copilot-header-btn:hover{color:var(--bright);background:rgba(255,255,255,.08)}
+    
+    .copilot-workspace-bar{
+      display:flex;align-items:center;gap:6px;padding:6px 12px;
+      background:var(--bg);border-bottom:1px solid var(--border);font-size:10px;
+    }
+    .copilot-workspace-badge{
+      display:inline-flex;align-items:center;gap:4px;
+      padding:2px 8px;background:rgba(79,193,255,.12);border:1px solid rgba(79,193,255,.3);
+      color:var(--blue);border-radius:12px;font-size:10px;
+    }
+
+    .copilot-body{
+      flex:1;overflow-y:auto;padding:16px 12px;display:flex;flex-direction:column;
+    }
+    .copilot-welcome{
+      display:flex;flex-direction:column;align-items:center;text-align:center;
+      margin-bottom:14px;
+    }
+    .copilot-avatar{
+      width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#6e40c9,#ff6fd8);
+      display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:10px;
+      box-shadow:0 0 16px rgba(110,64,201,.5);
+    }
+    .copilot-welcome-title{
+      font-size:14px;font-weight:700;color:var(--bright);margin-bottom:4px;
+    }
+    .copilot-welcome-desc{
+      font-size:11px;color:var(--dim);line-height:1.5;max-width:260px;margin-bottom:14px;
+    }
+
+    .copilot-preset-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;
+    }
+    .copilot-preset-card{
+      padding:8px;background:var(--bg3);border:1px solid var(--border);
+      border-radius:6px;color:var(--text);font-size:11px;line-height:1.35;
+      text-align:left;cursor:pointer;transition:all .15s;display:flex;gap:4px;
+    }
+    .copilot-preset-card:hover{
+      border-color:var(--accent);background:rgba(255,111,216,.08);color:var(--bright);
+      transform:translateY(-1px);
+    }
+    .copilot-preset-card .spark{color:var(--accent);font-size:10px;flex-shrink:0}
+
+    .copilot-chat-history{
+      display:flex;flex-direction:column;gap:10px;margin-top:10px;width:100%;
+    }
+    .copilot-msg{
+      max-width:90%;padding:8px 12px;border-radius:6px;font-size:12px;line-height:1.55;
+    }
+    .copilot-msg.bot{
+      background:var(--bg3);border:1px solid var(--border);color:var(--text);align-self:flex-start;
+    }
+    .copilot-msg.user{
+      background:var(--blue2);color:#fff;align-self:flex-end;
+    }
+
+    .copilot-footer-box{
+      padding:10px 12px;background:var(--bg3);border-top:1px solid var(--border);
+      display:flex;flex-direction:column;gap:6px;
+    }
+    .copilot-input-row{
+      display:flex;align-items:center;background:var(--bg2);border:1px solid var(--border);
+      border-radius:6px;padding:6px 8px;gap:6px;
+    }
+    .copilot-input-field{
+      flex:1;background:transparent;border:none;outline:none;
+      color:var(--bright);font-size:12px;font-family:inherit;
+    }
+    .copilot-input-field::placeholder{color:var(--dim)}
+    .copilot-send-btn{
+      width:24px;height:24px;border-radius:50%;background:var(--blue2);
+      color:#fff;display:flex;align-items:center;justify-content:center;
+      font-size:11px;cursor:pointer;border:none;transition:background .15s;
+    }
+    .copilot-send-btn:hover{background:#005fa3}
+    .copilot-submeta{
+      display:flex;align-items:center;justify-content:space-between;
+      font-size:10px;color:var(--dim);
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  SOURCE CONTROL POPOVER                        */
+    /* ═══════════════════════════════════════════════ */
+    .git-popover{
+      position:fixed;left:50px;top:110px;width:240px;
+      background:var(--bg3);border:1px solid var(--border);
+      border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.6);
+      padding:12px;z-index:9000;display:none;flex-direction:column;gap:10px;
+      animation:popFadeIn .15s ease;
+    }
+    .git-popover.open{display:flex}
+    @keyframes popFadeIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+    .git-popover-header{
+      display:flex;align-items:center;justify-content:space-between;
+      font-size:10px;
+    }
+    .git-popover-title{
+      font-weight:700;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;
+    }
+    .git-ahead-badge{
+      color:var(--green);font-size:10px;
+    }
+    .git-stats-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+      background:var(--bg2);padding:8px 6px;border-radius:4px;
+      border:1px solid var(--border);text-align:center;
+    }
+    .git-stat{display:flex;flex-direction:column;align-items:center}
+    .git-stat-num{font-size:16px;font-weight:700}
+    .git-stat-lbl{font-size:10px;color:var(--dim);margin-top:2px}
+    .git-popover-link{
+      font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:4px;
+      transition:color .1s;
+    }
+    .git-popover-link:hover{color:var(--bright);text-decoration:underline}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  DOWNLOADS POPOVER                             */
+    /* ═══════════════════════════════════════════════ */
+    .downloads-popover{
+      position:fixed;top:38px;right:16px;width:300px;
+      background:var(--bg3);border:1px solid var(--border);
+      border-radius:6px;box-shadow:0 14px 45px rgba(0,0,0,.7);
+      padding:10px;z-index:9999;display:none;flex-direction:column;gap:8px;
+      animation:slideDownPop .2s ease;
+    }
+    .downloads-popover.open{display:flex}
+    @keyframes slideDownPop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+    .download-item{
+      display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:4px;
+      background:var(--bg2);border:1px solid var(--border);
+    }
+    .download-icon{font-size:22px;display:flex;align-items:center;justify-content:center}
+    .download-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .download-name{font-size:12px;color:var(--bright);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .download-meta{font-size:10px;color:var(--dim)}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  COMMAND PALETTE                               */
+    /* ═══════════════════════════════════════════════ */
+    .cmd-overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.6);
+      z-index:9999;display:none;align-items:flex-start;justify-content:center;padding-top:14%;
+    }
+    .cmd-overlay.open{display:flex}
+    .cmd-box{
+      width:560px;max-width:92vw;background:var(--bg2);
+      border:1px solid var(--border);border-radius:8px;
+      box-shadow:0 20px 60px rgba(0,0,0,.75);overflow:hidden;
+      display:flex;flex-direction:column;
+    }
+    .cmd-header{
+      display:flex;align-items:center;padding:10px 14px;gap:8px;
+      border-bottom:1px solid var(--border);background:var(--bg3);
+    }
+    .cmd-prompt{color:var(--dim);font-size:14px;font-weight:600}
+    .cmd-input{
+      flex:1;background:transparent;border:none;outline:none;color:var(--bright);
+      font-size:13px;font-family:'JetBrains Mono',monospace;
+    }
+    .cmd-input::placeholder{color:var(--dim)}
+    .cmd-esc-badge{
+      font-size:10px;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.08);
+      border:1px solid var(--border);color:var(--dim);cursor:pointer;
+    }
+    .cmd-list{max-height:320px;overflow-y:auto;padding:6px}
+    .cmd-group-title{
+      padding:6px 12px 4px;font-size:10px;font-weight:700;
+      text-transform:uppercase;letter-spacing:.12em;color:var(--dim);
+    }
+    .cmd-item{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:7px 12px;border-radius:5px;cursor:pointer;
+      font-size:12px;color:var(--text);transition:background .08s;
+      margin-bottom:2px;
+    }
+    .cmd-item:hover,.cmd-item.highlighted{
+      background:rgba(110,64,201,.25);color:var(--bright);
+    }
+    .cmd-item-left{display:flex;align-items:center;gap:10px}
+    .cmd-item-icon{font-size:14px;width:18px;text-align:center;display:flex;align-items:center;justify-content:center}
+    .cmd-item-right{font-size:11px;color:var(--dim)}
+    .cmd-footer{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:6px 14px;background:var(--bg3);border-top:1px solid var(--border);
+      font-size:10px;color:var(--dim);
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  SECTIONS — COMMON                             */
+    /* ═══════════════════════════════════════════════ */
+    .section-wrapper{padding:3rem 3rem;max-width:940px;animation:fadeUp .25s ease}
+    .section-wrapper.wide{max-width:1100px}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .section-comment{font-size:14px;color:var(--green);font-style:italic;margin-bottom:12px}
+    .section-title{
+      font-family:'Syne',sans-serif;font-weight:800;
+      font-size:40px;color:var(--bright);letter-spacing:-.025em;margin-bottom:4px;
+    }
+    .section-subtitle{font-size:13px;color:var(--dim);margin-bottom:32px}
+    .card{
+      background:rgba(255,255,255,.025);border:1px solid var(--border);
+      border-radius:4px;padding:20px;margin-bottom:12px;
+      transition:border-color .2s,background .2s;
+    }
+    .card:hover{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
+    .reveal{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease!important}
+    .reveal.in{opacity:1;transform:none}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  HOME                                          */
+    /* ═══════════════════════════════════════════════ */
+    .home-wrapper{display:flex;align-items:center;gap:40px;padding:3rem 4rem;width:100%;min-height:0}
+    .home-content{flex:1;min-width:0}
+    .home-greeting{font-size:13px;color:var(--green);margin-bottom:10px;opacity:0;animation:slideUp .5s ease .1s forwards}
+    .home-name{
+      font-family:'Syne',sans-serif;font-weight:800;
+      line-height:1;color:var(--bright);letter-spacing:-2.5px;
+      margin-bottom:14px;opacity:0;animation:slideUp .5s ease .3s forwards;
+    }
+    .home-name .accent-name{
+      color:var(--accent);position:relative;font-style:normal;
+    }
+    .home-name .accent-name::after{
+      content:'';position:absolute;bottom:-2px;left:0;right:0;
+      height:2px;background:linear-gradient(to right,var(--accent),transparent);
+    }
+    .home-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;opacity:0;animation:slideUp .5s ease .5s forwards}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:4px 12px;font-size:11px;
+      border:1px solid rgba(255,255,255,.1);border-radius:2px;
+      background:rgba(255,255,255,.03);transition:border-color .2s;
+    }
+    .badge:hover{border-color:rgba(255,255,255,.2)}
+    .badge-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    .badge-accent{border-color:rgba(255,111,216,.3);color:var(--accent)}
+    .badge-accent .badge-dot{background:var(--accent)}
+    .home-typing{font-size:12px;color:var(--dim);margin-bottom:20px;min-height:20px;opacity:0;animation:slideUp .5s ease .5s forwards}
+    .typing-cursor{color:var(--accent);animation:blink 1.1s step-end infinite}
+    .home-bio{
+      font-size:13px;color:var(--dim);line-height:1.9;
+      max-width:520px;margin-bottom:28px;opacity:0;animation:slideUp .5s ease .7s forwards;
+    }
+    .home-bio strong{color:var(--blue);font-weight:500}
+    .home-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:48px;opacity:0;animation:slideUp .5s ease .9s forwards}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 20px;background:var(--blue2);color:#fff;
+      font-size:12px;border-radius:2px;transition:opacity .15s;
+    }
+    .btn-primary:hover{opacity:.85}
+    .btn-outline{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 20px;border:1px solid rgba(255,255,255,.14);
+      color:var(--text);font-size:12px;border-radius:2px;transition:border-color .2s;
+    }
+    .btn-outline:hover{border-color:rgba(255,255,255,.35)}
+    .stats-grid{
+      display:grid;grid-template-columns:repeat(4,1fr);
+      gap:1px;border:1px solid var(--border);border-radius:4px;
+      overflow:hidden;margin-bottom:24px;opacity:0;animation:slideUp .5s ease 1.1s forwards;
+    }
+    .subheading{
+      font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+      color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+    }
+    .subheading::after{content:'';flex:1;height:1px;background:var(--border);opacity:.5}
+    .tl-desc-list{list-style:none;padding:0;margin:0 0 12px 0;display:flex;flex-direction:column;gap:6px}
+    .tl-desc-list li{position:relative;padding-left:16px;font-size:12.5px;color:var(--dim);line-height:1.65}
+    .tl-desc-list li::before{content:'▹';position:absolute;left:0;top:0;color:var(--blue);font-size:11px}
+    .pdf-iframe-container{width:100%;height:750px;border-radius:6px;overflow:hidden;border:1px solid var(--border);background:#1e1e1e}
+    .pdf-mobile-fallback{display:none;padding:24px 16px;text-align:center;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:6px;margin-top:12px}
+    @media(max-width:768px){
+      .pdf-iframe-container{display:none!important}
+      .pdf-mobile-fallback{display:block!important}
+    }
+    .copilot-modal{
+      position:fixed;bottom:0;left:0;right:0;height:75vh;
+      background:var(--bg2);border-top:1px solid var(--border);
+      border-top-left-radius:12px;border-top-right-radius:12px;
+      box-shadow:0 -10px 40px rgba(0,0,0,.6);z-index:99999;
+      display:none;flex-direction:column;overflow:hidden;
+      animation:slideUpModal .22s ease;
+    }
+    .copilot-modal.open{display:flex}
+    @keyframes slideUpModal{from{transform:translateY(100%)}to{transform:translateY(0)}}
+    .copilot-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);
+      font-size:12px;font-weight:600;color:var(--bright);
+    }
+    .copilot-messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+    .copilot-chips{
+      display:flex;gap:6px;padding:8px 12px;overflow-x:auto;
+      border-top:1px solid var(--border);background:var(--bg3);flex-shrink:0;
+    }
+    .copilot-chip{
+      padding:4px 10px;background:var(--bg2);border:1px solid var(--border);
+      border-radius:12px;font-size:11px;color:var(--dim);white-space:nowrap;cursor:pointer;
+    }
+    .copilot-chip:hover{color:var(--bright);border-color:var(--blue)}
+    .copilot-input-box{
+      display:flex;align-items:center;padding:8px 12px;
+      background:var(--bg2);border-top:1px solid var(--border);gap:8px;flex-shrink:0;
+    }
+    .copilot-input{
+      flex:1;background:var(--bg3);border:1px solid var(--border);
+      border-radius:4px;padding:6px 10px;color:var(--bright);font-size:12px;
+      font-family:inherit;outline:none;
+    }
+    .copilot-send{
+      padding:6px 14px;background:var(--blue2);color:#fff;
+      border-radius:4px;font-size:12px;border:none;cursor:pointer;
+    }
+    .stat-cell{padding:16px;background:rgba(255,255,255,.02);text-align:center;transition:background .2s}
+    .stat-cell:hover{background:rgba(255,255,255,.04)}
+    .stat-num{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--bright);display:block;margin-bottom:2px}
+    .stat-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+    .social-links{display:flex;gap:8px;flex-wrap:wrap;opacity:0;animation:slideUp .5s ease 1.3s forwards}
+    .social-link{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 12px;border:1px solid var(--border);
+      border-radius:2px;font-size:11px;color:var(--dim);transition:all .2s;
+    }
+    .social-link:hover{border-color:rgba(255,111,216,.4);color:var(--bright);background:rgba(255,111,216,.06)}
+    .social-link svg{width:14px;height:14px}
+    @keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @keyframes blink{50%{opacity:0}}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  ABOUT                                         */
+    /* ═══════════════════════════════════════════════ */
+    .focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .focus-item{display:flex;gap:10px;font-size:12px;color:var(--dim);line-height:1.6}
+    .focus-item span:first-child{flex-shrink:0}
+    .edu-card{
+      background:rgba(255,255,255,.025);border:1px solid var(--border);
+      border-radius:4px;padding:20px;margin-bottom:10px;transition:border-color .2s;
+    }
+    .edu-card:hover{border-color:rgba(255,255,255,.12)}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  PROJECTS                                      */
+    /* ═══════════════════════════════════════════════ */
+    .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .project-card{
+      position:relative;background:rgba(255,255,255,.02);
+      border:1px solid var(--border);border-radius:4px;
+      padding:20px;overflow:hidden;transition:all .2s;
+    }
+    .project-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;
+      height:2px;background:var(--card-accent,var(--accent));
+      transform:scaleX(0);transform-origin:left;transition:transform .3s ease!important;
+    }
+    .project-card:hover::before{transform:scaleX(1)}
+    .project-card:hover{border-color:rgba(255,255,255,.14);transform:translateY(-2px);background:rgba(255,255,255,.03)}
+    .project-icon{font-size:22px;margin-bottom:12px}
+    .project-type{font-size:12px;text-transform:uppercase;letter-spacing:.15em;font-weight:500}
+    .project-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--bright);margin-bottom:10px}
+    .project-desc{font-size:12px;color:var(--dim);line-height:1.75;margin-bottom:16px}
+    .project-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .project-tag{
+      font-size:10px;padding:2px 6px;background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);border-radius:2px;color:var(--dim);
+    }
+    .project-links{display:flex;gap:8px}
+    .project-link{
+      font-size:11px;color:var(--dim);padding:2px 8px;
+      border:1px solid var(--border);border-radius:2px;transition:all .15s;
+    }
+    .project-link:hover{color:var(--text);border-color:rgba(255,255,255,.28)}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  SKILLS                                        */
+    /* ═══════════════════════════════════════════════ */
+    .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 40px}
+    .skill-group-title{
+      font-size:16px;text-transform:uppercase;letter-spacing:.2em;
+      color:var(--yellow);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);
+    }
+    .skill-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .skill-name{width:120px;font-size:13px;color:var(--dim);flex-shrink:0}
+    .skill-bar-bg{flex:1;height:2px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+    .skill-bar-fill{height:100%;border-radius:4px;transition:width 1.4s ease-out!important;width:0}
+    .skill-pct{width:36px;text-align:right;font-size:13px;flex-shrink:0}
+    .also-familiar{display:flex;flex-wrap:wrap;gap:8px}
+    .familiar-tag{
+      font-size:13px;padding:4px 10px;border:1px solid var(--border);
+      border-radius:4px;color:var(--dim);cursor:default;transition:all .2s;
+    }
+    .familiar-tag:hover{border-color:var(--blue2);color:var(--blue)}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  EXPERIENCE                                    */
+    /* ═══════════════════════════════════════════════ */
+    .timeline{padding-left:12px;border-left:1px solid var(--border)}
+    .tl-entry{position:relative;padding-left:20px;margin-bottom:36px}
+    .tl-entry::before{
+      content:'';position:absolute;left:-5px;top:7px;
+      width:9px;height:9px;border-radius:50%;
+      box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--blue2);background:var(--blue2);
+    }
+    .tl-entry.dimmed::before{background:var(--dim);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--dim)}
+    .tl-date{font-size:13px;color:var(--dim);letter-spacing:.025em;margin-bottom:6px}
+    .tl-role{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:var(--bright);margin-bottom:2px}
+    .tl-company{font-size:13px;color:var(--blue);margin-bottom:10px}
+    .tl-desc{font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:12px}
+    .tl-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .tl-tag{
+      font-size:11px;padding:2px 6px;border-radius:2px;
+      color:var(--blue);border:1px solid rgba(0,122,204,.25);background:rgba(0,122,204,.08);
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  CONTACT                                       */
+    /* ═══════════════════════════════════════════════ */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .contact-link-item{
+      display:flex;align-items:center;gap:12px;
+      padding:10px 14px;border:1px solid var(--border);border-radius:4px;
+      margin-bottom:8px;transition:all .2s;background:rgba(255,255,255,.01);
+    }
+    .contact-link-item:hover{border-color:rgba(78,201,176,.4);background:rgba(78,201,176,.06)}
+    .contact-icon-box{
+      width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+      border-radius:4px;flex-shrink:0;
+    }
+    .contact-icon-box svg{width:16px;height:16px}
+    .contact-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:2px}
+    .contact-value{font-size:12px;color:var(--text)}
+    .contact-arrow{margin-left:auto;font-size:12px;opacity:.25;flex-shrink:0}
+    .form-group{margin-bottom:12px}
+    .form-label{display:block;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+    .form-label .req{color:var(--red)}
+    .form-input{
+      width:100%;padding:8px 12px;background:rgba(255,255,255,.03);
+      border:1px solid var(--border);border-radius:2px;
+      color:var(--text);font-size:12px;outline:none;transition:border-color .2s;
+    }
+    .form-input::placeholder{color:rgba(119,119,119,.5)}
+    .form-input:focus{border-color:var(--blue2)}
+    textarea.form-input{resize:none;min-height:100px}
+    .btn-send{
+      width:100%;padding:10px 20px;background:var(--blue2);color:#fff;
+      font-size:12px;border-radius:2px;text-align:left;transition:opacity .15s;
+      cursor:pointer;border:none;font-family:'JetBrains Mono',monospace;
+    }
+    .btn-send:hover{opacity:.85}
+    .form-note{font-size:11px;color:var(--dim);margin-top:8px;opacity:.8}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  README SECTION                                */
+    /* ═══════════════════════════════════════════════ */
+    .readme-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:2px 10px;border-radius:2px;font-size:12px;border:1px solid;
+    }
+    .readme-code{
+      background:rgba(255,255,255,.07);padding:0 8px;border-radius:2px;
+      font-size:13px;color:var(--orange);margin:0 2px;
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  MOBILE / COMPACT                              */
+    /* ═══════════════════════════════════════════════ */
+    .compact-topbar{
+      display:flex;align-items:center;gap:8px;
+      padding:0 12px;height:44px;flex-shrink:0;
+      border-bottom:1px solid var(--border);background:var(--bg2);
+    }
+    .hamburger{
+      display:flex;flex-direction:column;gap:4px;padding:6px;
+      border-radius:4px;background:transparent;border:none;cursor:pointer;
+    }
+    .hamburger span{display:block;height:1.5px;width:18px;border-radius:2px;background:var(--text)}
+    .compact-path{display:flex;align-items:center;gap:4px;font-size:12px;flex:1;min-width:0;overflow:hidden}
+    .compact-path .cdim{color:var(--dim);flex-shrink:0}
+    .compact-path .cname{color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .mobile-nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9000;display:none}
+    .mobile-nav-overlay.open{display:block}
+    .mobile-nav{
+      position:fixed;top:0;left:0;bottom:0;width:260px;
+      background:var(--bg2);border-right:1px solid var(--border);
+      z-index:9001;transform:translateX(-100%);transition:transform .25s ease;
+      padding:16px 0;overflow-y:auto;
+    }
+    .mobile-nav.open{transform:translateX(0)}
+    .mobile-nav-title{padding:8px 16px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);font-weight:600}
+    .mobile-nav-item{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 16px;font-size:13px;color:var(--dim);
+      cursor:pointer;transition:all .1s;border:none;
+      background:transparent;width:100%;text-align:left;
+    }
+    .mobile-nav-item:hover{background:rgba(255,255,255,.04);color:var(--text)}
+    .mobile-nav-item.active{background:rgba(255,255,255,.06);color:var(--bright)}
+    .mobile-nav-item .micon{font-size:15px;width:22px;text-align:center}
+    .mobile-theme-section{padding:12px 16px;border-top:1px solid var(--border);margin-top:12px}
+    .mobile-theme-section .mlabel{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);font-weight:600;margin-bottom:8px}
+    .mobile-theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+    .mobile-theme-btn{
+      padding:6px 8px;font-size:11px;border-radius:4px;
+      border:1px solid var(--border);background:transparent;
+      color:var(--dim);cursor:pointer;transition:all .1s;text-align:left;
+    }
+    .mobile-theme-btn:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
+    .mobile-theme-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(255,111,216,.1)}
+
+    /* ═══════════════════════════════════════════════ */
+    /*  CUSTOM CURSOR                                 */
+    /* ═══════════════════════════════════════════════ */
+    #cursor-outer{
+      position:fixed;width:26px;height:26px;
+      border:1.5px solid rgba(255,255,255,.55);
+      pointer-events:none;z-index:999999;transform:translate(-50%,-50%);
+      transition:width .18s ease,height .18s ease,border-color .18s ease,background .18s ease;
+    }
+    #cursor-outer::before,#cursor-outer::after{content:'';position:absolute;background:rgba(255,255,255,.4)}
+    #cursor-outer::before{top:50%;left:-5px;width:4px;height:1px;transform:translateY(-50%)}
+    #cursor-outer::after{left:50%;top:-5px;height:4px;width:1px;transform:translateX(-50%)}
+    #cursor-inner{
+      position:fixed;width:5px;height:5px;
+      background:rgba(255,255,255,.9);
+      pointer-events:none;z-index:999999;transform:translate(-50%,-50%);
+      box-shadow:0 0 6px rgba(255,255,255,.5);
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  RESPONSIVE                                    */
+    /* ═══════════════════════════════════════════════ */
+    @media(max-width:1023px){
+      .app-grid{display:none!important}
+      .mobile-app{display:flex!important}
+      .section-wrapper,.home-wrapper{padding:1.25rem 1rem 2rem}
+      .home-name{font-size:clamp(30px,8vw,48px)!important}
+      .projects-grid,.skills-grid,.focus-grid,.contact-grid{grid-template-columns:1fr!important}
+      .stats-grid{grid-template-columns:repeat(2,1fr)!important}
+      .home-buttons{flex-direction:column}
+      .btn-primary,.btn-outline{width:100%;justify-content:center}
+    }
+    @media(min-width:1024px){
+      .mobile-app{display:none!important}
+      body.custom-cursor *{cursor:none!important}
+    }
+    .mobile-app{display:none;flex-direction:column;width:100vw;height:100vh;overflow:hidden}
+    .mobile-content{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch}
+    .mobile-status{flex-shrink:0;height:22px}
+
+    /* Smooth theme transitions */
+    *,*::before,*::after{transition:background-color .3s ease,border-color .3s ease,color .2s ease}
+    .reveal{transition:opacity .45s ease,transform .45s ease!important}
+    .project-card::before{transition:transform .3s ease!important}
+    .skill-bar-fill{transition:width 1.4s ease-out!important}
+  </style>
+</head>
+<body>
+  <!-- Desktop -->
+  <div class="app-grid" id="desktop-app">
+    <div class="titlebar">
+      <div class="titlebar-left">
+        <div class="titlebar-dots" id="titlebar-dots-container">
+          <span id="dot-close" class="titlebar-dot close" title="Close"></span>
+          <span id="dot-min" class="titlebar-dot min" title="Minimize"></span>
+          <span id="dot-max" class="titlebar-dot max" title="Maximize / Fullscreen"></span>
+        </div>
+        <span id="titlebar-easter-egg" class="titlebar-easter-egg"></span>
+      </div>
+      <div class="titlebar-search" onclick="openCmd()">
+        <span>🔍</span> muhammad-hashir — portfolio [workspace] <span class="kbd">Ctrl P</span>
+      </div>
+      <div class="titlebar-right"></div>
+    </div>
+    <div class="menubar" id="menubar">
+      <!-- File Menu -->
+      <div class="menu-item-wrap">
+        <button class="menu-trigger" data-menu="file">File</button>
+        <div class="menu-dropdown" id="dropdown-file">
+          <button class="menu-dropdown-item" onclick="menuAction('newTab')">New Tab <span class="shortcut">Ctrl+T</span></button>
+          <button class="menu-dropdown-item" onclick="menuAction('openFile')">Open File... <span class="shortcut">Ctrl+O</span></button>
+          <div class="menu-dropdown-sep"></div>
+          <button class="menu-dropdown-item" onclick="menuAction('closeTab')">Close Tab <span class="shortcut">Ctrl+W</span></button>
+          <button class="menu-dropdown-item" onclick="menuAction('closeAll')">Close All Tabs</button>
+          <div class="menu-dropdown-sep"></div>
+          <div class="menu-dropdown-label">Open Recent</div>
+          <div id="menu-recent-files"></div>
+          <div class="menu-dropdown-sep"></div>
+          <button class="menu-dropdown-item" onclick="menuAction('resume')">Download Curriculum Vitae (PDF)</button>
+        </div>
+      </div>
+
+      <!-- Edit Menu -->
+      <div class="menu-item-wrap">
+        <button class="menu-trigger" data-menu="edit">Edit</button>
+        <div class="menu-dropdown" id="dropdown-edit">
+          <button class="menu-dropdown-item" onclick="menuAction('find')">Find... <span class="shortcut">Ctrl+F</span></button>
+          <button class="menu-dropdown-item" onclick="menuAction('selectAll')">Select All <span class="shortcut">Ctrl+A</span></button>
+          <button class="menu-dropdown-item" onclick="menuAction('copy')">Copy <span class="shortcut">Ctrl+C</span></button>
+        </div>
+      </div>
+
+      <!-- View Menu -->
+      <div class="menu-item-wrap">
+        <button class="menu-trigger" data-menu="view">View</button>
+        <div class="menu-dropdown" id="dropdown-view">
+          <button class="menu-dropdown-item" onclick="menuAction('toggleSidebar')">Toggle Sidebar <span class="shortcut">Ctrl+B</span></button>
+          <button class="menu-dropdown-item" onclick="menuAction('toggleTerminal')">Toggle Terminal <span class="shortcut">Ctrl+`</span></button>
+          <button class="menu-dropdown-item" onclick="menuAction('toggleCopilot')">Toggle Copilot</button>
+          <div class="menu-dropdown-sep"></div>
+          <div class="menu-dropdown-label">Color Themes</div>
+          <button class="menu-dropdown-item active" data-theme-choice="default" onclick="setTheme('default')">Hashir Dark</button>
+          <button class="menu-dropdown-item" data-theme-choice="tokyo-night" onclick="setTheme('tokyo-night')">Tokyo Night</button>
+          <button class="menu-dropdown-item" data-theme-choice="catppuccin" onclick="setTheme('catppuccin')">Catppuccin</button>
+          <button class="menu-dropdown-item" data-theme-choice="nord" onclick="setTheme('nord')">Nord</button>
+        </div>
+      </div>
+
+      <!-- Go Menu -->
+      <div class="menu-item-wrap">
+        <button class="menu-trigger" data-menu="go">Go</button>
+        <div class="menu-dropdown" id="dropdown-go">
+          <button class="menu-dropdown-item" onclick="menuAction('openFile')">Go to File... <span class="shortcut">Ctrl+P</span></button>
+          <div class="menu-dropdown-sep"></div>
+          <div class="menu-dropdown-label">FILES</div>
+          <button class="menu-dropdown-item" onclick="navigateTo('home')">home.tsx</button>
+          <button class="menu-dropdown-item" onclick="navigateTo('about')">about.html</button>
+          <button class="menu-dropdown-item" onclick="navigateTo('projects')">projects.js</button>
+          <button class="menu-dropdown-item" onclick="navigateTo('skills')">skills.json</button>
+          <button class="menu-dropdown-item" onclick="navigateTo('experience')">experience.ts</button>
+          <button class="menu-dropdown-item" onclick="navigateTo('contact')">contact.css</button>
+          <button class="menu-dropdown-item" onclick="navigateTo('readme')">README.md</button>
+          <button class="menu-dropdown-item" onclick="navigateTo('resume')">Hashir_cv.pdf</button>
+        </div>
+      </div>
+
+      <!-- Run Menu -->
+      <div class="menu-item-wrap">
+        <button class="menu-trigger" data-menu="run">Run</button>
+        <div class="menu-dropdown" id="dropdown-run">
+          <button class="menu-dropdown-item" onclick="menuAction('runCode')">Run Without Debugging <span class="shortcut">F5</span></button>
+          <button class="menu-dropdown-item" onclick="menuAction('toggleTerminal')">Start in Terminal</button>
+        </div>
+      </div>
+
+      <!-- Terminal Menu -->
+      <div class="menu-item-wrap">
+        <button class="menu-trigger" data-menu="terminal">Terminal</button>
+        <div class="menu-dropdown" id="dropdown-terminal">
+          <button class="menu-dropdown-item" onclick="menuAction('toggleTerminal')">New Terminal <span class="shortcut">Ctrl+`</span></button>
+          <button class="menu-dropdown-item" onclick="menuAction('clearTerminal')">Clear Terminal</button>
+        </div>
+      </div>
+
+      <!-- Help Menu -->
+      <div class="menu-item-wrap">
+        <button class="menu-trigger" data-menu="help">Help</button>
+        <div class="menu-dropdown" id="dropdown-help">
+          <button class="menu-dropdown-item" onclick="navigateTo('readme')">Documentation (README)</button>
+          <button class="menu-dropdown-item" onclick="openCmd()">Command Palette <span class="shortcut">Ctrl+P</span></button>
+          <button class="menu-dropdown-item" onclick="toggleCopilot()">Portfolio AI Assistant</button>
+          <div class="menu-dropdown-sep"></div>
+          <button class="menu-dropdown-item" onclick="window.open('https://github.com/hashirch','_blank')">GitHub Profile ↗</button>
+          <button class="menu-dropdown-item" onclick="window.open('https://www.linkedin.com/in/muhammad-hashir-chaudhary-07225136b','_blank')">LinkedIn Profile ↗</button>
+        </div>
+      </div>
+
+      <button class="menu-simple" onclick="toggleCopilot()">Copilot</button>
+    </div>
+    <div class="activity-bar" id="activity-bar"></div>
+    <div class="sidebar" id="sidebar"></div>
+    <div class="editor-area">
+      <div class="tab-bar" id="tab-bar"></div>
+      <div class="breadcrumb" id="breadcrumb"></div>
+      <div class="editor-content" id="editor-content"></div>
+      
+      <!-- Embedded Terminal Panel -->
+      <div class="terminal-panel" id="terminal-panel">
+        <div class="terminal-header">
+          <div class="terminal-tabs">
+            <span class="terminal-tab">TERMINAL</span>
+            <span style="opacity:.6">PROBLEMS</span>
+            <span style="opacity:.6">OUTPUT</span>
+          </div>
+          <button onclick="toggleTerminal()" style="font-size:14px;cursor:pointer">×</button>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <div class="term-line term-out" style="color:var(--dim);margin-bottom:8px">VS Code Integrated Terminal [bash v5.2] — Type '<span style="color:var(--blue)">help</span>' for available system commands.</div>
+          <div id="term-history"></div>
+          <form class="term-input-line" onsubmit="handleTermSubmit(event)">
+            <span class="term-prompt">hashir@portfolio:~$</span>
+            <input class="term-input" id="term-input" autocomplete="off" />
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Copilot Secondary Right Panel -->
+    <div class="copilot-sidepanel" id="copilot-sidepanel">
+      <div class="copilot-panel-header">
+        <span style="display:flex;align-items:center;gap:6px">
+          <span style="color:#b48eff">✦</span> Portfolio AI Assistant
+        </span>
+        <div class="copilot-header-actions">
+          <button class="copilot-header-btn" onclick="clearCopilotChat()" title="New Chat">✎</button>
+          <button class="copilot-header-btn" onclick="toggleCopilot()" title="Close">×</button>
+        </div>
+      </div>
+      <div class="copilot-workspace-bar">
+        <span style="color:var(--dim)">WORKSPACE</span>
+        <span class="copilot-workspace-badge">● portfolio - muhammad hashir</span>
+      </div>
+      <div class="copilot-body" id="copilot-body">
+        <div class="copilot-welcome" id="copilot-welcome">
+          <div class="copilot-avatar">✦</div>
+          <div class="copilot-welcome-title">Portfolio AI Assistant</div>
+          <div class="copilot-welcome-desc">Query Muhammad Hashir's system architectures, enterprise engineering track record, machine learning pipelines, or academic credentials.</div>
+          <div class="copilot-preset-grid">
+            <button class="copilot-preset-card" onclick="askCopilot('Summarize Hashir\'s technical background')"><span class="spark">✦</span> Technical Profile</button>
+            <button class="copilot-preset-card" onclick="askCopilot('What projects has Hashir built?')"><span class="spark">✦</span> Featured Architectures</button>
+            <button class="copilot-preset-card" onclick="askCopilot('Tell me about his experience at Osoltech')"><span class="spark">✦</span> Osoltech Experience</button>
+            <button class="copilot-preset-card" onclick="askCopilot('What is his tech stack?')"><span class="spark">✦</span> Tech Stack & Tooling</button>
+            <button class="copilot-preset-card" onclick="askCopilot('Tell me about Ovula (FYP)')"><span class="spark">✦</span> Ovula (AI Healthcare)</button>
+            <button class="copilot-preset-card" onclick="askCopilot('How can I contact Hashir?')"><span class="spark">✦</span> Contact & Availability</button>
+          </div>
+        </div>
+        <div class="copilot-chat-history" id="copilot-chat-history"></div>
+      </div>
+      <div class="copilot-footer-box">
+        <form class="copilot-input-row" onsubmit="handleCopilotSubmit(event)">
+          <input class="copilot-input-field" id="copilot-input-field" placeholder="Ask about system architectures, ML pipelines, experience..." autocomplete="off" />
+          <button class="copilot-send-btn" type="submit">➤</button>
+        </form>
+        <div class="copilot-submeta">
+          <span>AI Assistant Active</span>
+          <span style="opacity:.6">Muhammad Hashir Portfolio</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="statusbar" id="statusbar"></div>
+  </div>
+
+  <!-- Mobile -->
+  <div class="mobile-app" id="mobile-app">
+    <div class="compact-topbar">
+      <button class="hamburger" id="mobile-menu-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <div class="compact-path"><span class="cdim">~/</span><span class="cname" id="mobile-path-name">home</span></div>
+      <button id="mobile-search-btn" style="font-size:12px;padding:4px 8px;border-radius:4px;background:rgba(255,255,255,.06);color:var(--dim);border:none;cursor:pointer">🔍</button>
+    </div>
+    <div class="mobile-content" id="mobile-content"></div>
+    <div class="mobile-status statusbar" id="mobile-statusbar"></div>
+  </div>
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <div class="mobile-nav" id="mobile-nav"></div>
+  <!-- Copilot Modal (Mobile) -->
+  <div class="copilot-modal" id="copilot-modal">
+    <div class="copilot-header">
+      <span style="display:flex;align-items:center;gap:6px">
+        <span style="color:#b48eff">✦</span> Portfolio AI Assistant
+      </span>
+      <button onclick="toggleCopilot()" style="font-size:14px;cursor:pointer">×</button>
+    </div>
+    <div class="copilot-messages" id="copilot-messages">
+      <div class="copilot-msg bot">
+        Welcome. I am Hashir's technical portfolio assistant. Inquire about system architectures, ML pipeline benchmarks, professional experience at Osoltech, or core competencies.
+      </div>
+    </div>
+    <div class="copilot-chips">
+      <button class="copilot-chip" onclick="askCopilot('What projects has Hashir built?')">Featured Projects</button>
+      <button class="copilot-chip" onclick="askCopilot('What is his tech stack?')">Tech Stack</button>
+      <button class="copilot-chip" onclick="askCopilot('Tell me about his experience at Osoltech')">Osoltech Experience</button>
+      <button class="copilot-chip" onclick="askCopilot('Tell me about Ovula (FYP)')">Ovula Healthcare</button>
+      <button class="copilot-chip" onclick="askCopilot('How can I contact Hashir?')">Contact</button>
+    </div>
+    <form class="copilot-input-box" onsubmit="handleCopilotSubmit(event)">
+      <input class="copilot-input" id="copilot-input" placeholder="Ask a technical question..." autocomplete="off" />
+      <button class="copilot-send" type="submit">Send</button>
+    </form>
+  </div>
+
+  <div class="cmd-overlay" id="cmd-overlay">
+    <div class="cmd-box">
+      <div class="cmd-header">
+        <span class="cmd-prompt">&gt;</span>
+        <input class="cmd-input" id="cmd-input" placeholder="Go to file or run command..." autocomplete="off" />
+        <span class="cmd-esc-badge" onclick="closeCmd()">Esc</span>
+      </div>
+      <div class="cmd-list" id="cmd-list"></div>
+      <div class="cmd-footer">
+        <span>↑↓ navigate &nbsp;·&nbsp; ↵ open &nbsp;·&nbsp; Esc close</span>
+        <span style="opacity:.8">Tip: type "copilot" to open AI chat</span>
+      </div>
+    </div>
+  </div>
+  <!-- Source Control Popover -->
+  <div class="git-popover" id="git-popover">
+    <div class="git-popover-header">
+      <span class="git-popover-title">SOURCE CONTROL</span>
+      <span class="git-ahead-badge">↑ 1 commit ahead</span>
+    </div>
+    <div class="git-stats-grid">
+      <div class="git-stat">
+        <span class="git-stat-num" style="color:var(--yellow)">3</span>
+        <span class="git-stat-lbl">Modified</span>
+      </div>
+      <div class="git-stat">
+        <span class="git-stat-num" style="color:var(--green)">1</span>
+        <span class="git-stat-lbl">Added</span>
+      </div>
+      <div class="git-stat">
+        <span class="git-stat-num" style="color:var(--red)">0</span>
+        <span class="git-stat-lbl">Deleted</span>
+      </div>
+    </div>
+    <a href="https://github.com/hashirch" target="_blank" class="git-popover-link">View on GitHub ↗</a>
+  </div>
+
+  <!-- Downloads Popover -->
+  <div class="downloads-popover" id="downloads-popover">
+    <div class="download-item">
+      <div class="download-icon">📄</div>
+      <div class="download-info">
+        <div class="download-name">Hashir_cv.pdf</div>
+        <div class="download-meta">103.6 KB · Just now · Complete</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Drawer Popover -->
+  <div class="settings-popover" id="settings-popover">
+    <div class="settings-header">
+      <span class="settings-title">SETTINGS</span>
+    </div>
+    
+    <div class="settings-section">
+      <div class="settings-section-title">🎨 THEME SYSTEM</div>
+      <div class="settings-theme-list" id="settings-theme-list"></div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section-title">⚡ QUICK ACTIONS</div>
+      <div class="settings-actions-list">
+        <button class="settings-action-item" onclick="closeSettings();openCmd()">
+          <span class="settings-action-left">🔍 Command Palette</span>
+          <span class="settings-action-key">Ctrl+P</span>
+        </button>
+        <button class="settings-action-item" onclick="closeSettings();toggleTerminal()">
+          <span class="settings-action-left">💻 Toggle Terminal</span>
+          <span class="settings-action-key">Ctrl+`</span>
+        </button>
+        <button class="settings-action-item" onclick="closeSettings();toggleCopilot()">
+          <span class="settings-action-left">✨ Copilot Chat</span>
+        </button>
+        <button class="settings-action-item" onclick="closeSettings();triggerResumeDownload()">
+          <span class="settings-action-left">📥 Download Curriculum Vitae</span>
+        </button>
+        <button class="settings-action-item" onclick="toggleFullscreen()">
+          <span class="settings-action-left">🖥 Toggle Fullscreen</span>
+          <span class="settings-action-key">F11</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section-title">⌨ KEYBOARD SHORTCUTS</div>
+      <div class="settings-shortcuts-list">
+        <div class="settings-shortcut-row"><span class="shortcut-key">Ctrl P</span><span class="shortcut-desc">Go to file (command palette)</span></div>
+        <div class="settings-shortcut-row"><span class="shortcut-key">Ctrl `</span><span class="shortcut-desc">Toggle terminal</span></div>
+        <div class="settings-shortcut-row"><span class="shortcut-key">Ctrl B</span><span class="shortcut-desc">Toggle sidebar</span></div>
+        <div class="settings-shortcut-row"><span class="shortcut-key">Esc</span><span class="shortcut-desc">Close overlay</span></div>
+        <div class="settings-shortcut-row"><span class="shortcut-key">↑ / ↓</span><span class="shortcut-desc">Terminal history</span></div>
+      </div>
+    </div>
+
+    <div class="settings-footer">
+      <div>Muhammad Hashir • Software Engineer</div>
+      <div style="margin-top:2px">BS Computer Science @ FAST NUCES</div>
+    </div>
+  </div>
+  <div id="cursor-outer"></div>
+  <div id="cursor-inner"></div>
+
+  <script>
+    /* ═══════════════════════════════════════════════ */
+    /*  DATA — MUHAMMAD HASHIR                        */
+    /* ═══════════════════════════════════════════════ */
+    const OWNER = {
+      name: "Muhammad Hashir",
+      firstName: "Muhammad",
+      lastName: "Hashir",
+      role: "Software Engineer & ML Specialist",
+      subtitle: "BS in Computer Science @ FAST NUCES ('26)",
+      location: "Peshawar, Pakistan",
+      email: "hashirchbss@gmail.com",
+      phone: "+92 332 222 6955",
+      bio: `Software Engineer and Computer Science senior at <strong style="color:var(--blue);font-weight:500">FAST NUCES</strong> specializing in <strong style="color:var(--blue);font-weight:500">Python, C# (.NET Core)</strong>, and <strong style="color:var(--blue);font-weight:500">Applied Machine Learning</strong>. Experienced in architecting enterprise platforms with <strong style="color:var(--blue);font-weight:500">Clean Architecture</strong>, building cross-platform healthcare applications, and deploying <strong style="color:var(--blue);font-weight:500">production-grade ML inference pipelines</strong> with rigorous automated test suites.`,
+      links: {
+        github: "https://github.com/hashirch",
+        linkedin: "https://www.linkedin.com/in/muhammad-hashir-chaudhary-07225136b",
+        email: "mailto:hashirchbss@gmail.com",
+        phone: "tel:+923322226955",
+      }
+    };
+
+    const FILES = [
+      {id:"home",name:"home.tsx",icon:"⚛️",ext:"TypeScript React"},
+      {id:"about",name:"about.html",icon:"📄",ext:"HTML"},
+      {id:"projects",name:"projects.js",icon:"📁",ext:"JavaScript"},
+      {id:"skills",name:"skills.json",icon:"🔧",ext:"JSON"},
+      {id:"experience",name:"experience.ts",icon:"💼",ext:"TypeScript"},
+      {id:"contact",name:"contact.css",icon:"✉️",ext:"CSS"},
+      {id:"readme",name:"README.md",icon:"📋",ext:"Markdown"},
+      {id:"resume",name:"Hashir_cv.pdf",icon:"📄",ext:"PDF"},
+    ];
+
+    const THEMES = [
+      {id:"default",name:"Hashir Dark",dot:"#b48eff",emoji:"💜"},
+      {id:"tokyo-night",name:"Tokyo Night",dot:"#7aa2f7",emoji:"🌃"},
+      {id:"catppuccin",name:"Catppuccin",dot:"#f5c2e7",emoji:"🐱"},
+      {id:"nord",name:"Nord",dot:"#88c0d0",emoji:"❄️"},
+    ];
+
+    const TYPING_STRINGS = [
+      "Architecting enterprise backends with C# & Clean Architecture...",
+      "Deploying production ML inference pipelines with Scikit-learn & TensorFlow...",
+      "Engineering high-throughput asynchronous REST APIs with FastAPI...",
+      "Building cross-platform healthcare applications with React & Capacitor...",
+      "Enforcing regression resilience via TDD with xUnit & pytest...",
+    ];
+
+    const PROJECTS = [
+      {
+        id: 1,
+        icon: "🩺",
+        type: "Final Year Project · AI Healthcare · Cross-Platform",
+        name: "Ovula – PCOS Tracker & AI Healthcare Assistant",
+        desc: "AI-powered clinical decision-support platform classifying Polycystic Ovary Syndrome (PCOS) risk with 87% diagnostic accuracy via ensemble machine learning. Engineered a responsive cross-platform client with React and CapacitorJS backed by custom Android native Kotlin modules. Implemented an asynchronous FastAPI microservice interfaced with a fine-tuned conversational LLM voice assistant for clinical symptom logging and patient guidance, structured within a HIPAA-compliant encrypted storage architecture.",
+        tags: ["React", "CapacitorJS", "Kotlin", "Python", "FastAPI", "LLM Fine-Tuning", "Scikit-learn", "HIPAA Architecture"],
+        accent: "#c586c0",
+        link: "https://github.com/hashirch"
+      },
+      {
+        id: 2,
+        icon: "🏛️",
+        type: "Enterprise ERP · Clean Architecture · C# / .NET 9",
+        name: "Smart University Management System (SUMS)",
+        desc: "Enterprise-grade academic resource planning platform designed under strict Clean Architecture boundaries to isolate domain business logic from infrastructure dependencies. Engineered a dynamic QR-code attendance verification engine equipped with anti-duplicate validation and time-expiry controls. Designed automated finite-state machines to orchestrate priority waitlist promotions and multi-tier petition approval workflows. Built a comprehensive 47-test xUnit suite achieving high branch coverage across critical operations.",
+        tags: ["C#", "ASP.NET Core 9", "Entity Framework Core", "SQL Server", "xUnit", "JWT", "Clean Architecture", "State Machines"],
+        accent: "#4ec9b0",
+        link: "https://github.com/hashirch"
+      },
+      {
+        id: 3,
+        icon: "🛡️",
+        type: "Cybersecurity · Explainable AI (XAI) · FastAPI",
+        name: "PhishShield-XAI – Adversarial Phishing Detection",
+        desc: "Adversarial-resistant cybersecurity detection microservice engineered for high-throughput security filtering, achieving sub-50ms inference latency via FastAPI. Trained on 1,000+ adversarial samples with gradient-boosted decision trees and ensemble classifiers. Integrated global and token-level explainability through SHAP and LIME algorithms to interpret threat vectors, paired with an adversarial evasion simulator testing heuristic rule resilience.",
+        tags: ["Python", "FastAPI", "Scikit-learn", "XGBoost", "SHAP", "LIME", "Docker", "Sub-50ms Inference"],
+        accent: "#4fc1ff",
+        link: "https://github.com/hashirch"
+      },
+      {
+        id: 4,
+        icon: "📊",
+        type: "Financial ML · Production Pipeline · Scikit-learn",
+        name: "Credit Risk Machine Learning Pipeline",
+        desc: "Production-grade credit underwriting and default risk pipeline automating deterministic data ingestion, statistical anomaly cleaning, and feature transformations. Conducted comparative model evaluations across Logistic Regression, Decision Trees, and tuned Random Forests to maximize precision-recall tradeoff. Serialized feature transformers and trained estimators using Joblib for rapid, reproducible production deployment.",
+        tags: ["Python", "Scikit-learn", "Joblib", "Pandas", "NumPy", "Feature Engineering", "Model Serialization"],
+        accent: "#f9a825",
+        link: "https://github.com/hashirch"
+      },
+      {
+        id: 5,
+        icon: "🎤",
+        type: "Deep Learning · Acoustic Modeling · CNN-LSTM",
+        name: "Speech Emotion Recognition Deep Learning Pipeline",
+        desc: "End-to-end deep learning pipeline for acoustic feature extraction and emotion classification from raw speech audio signals. Utilized Librosa to extract Mel-Frequency Cepstral Coefficients (MFCCs), Chroma representations, and Mel Spectrograms. Trained a hybrid 1D-CNN + Bidirectional LSTM neural network architecture with regularization and batch normalization to capture spatial acoustic characteristics and temporal prosody.",
+        tags: ["Python", "TensorFlow", "Keras", "Librosa", "CNN-LSTM", "Audio DSP", "Mel Spectrograms"],
+        accent: "#e91e63",
+        link: "https://github.com/hashirch"
+      },
+    ];
+
+    const SKILL_GROUPS = [
+      {group:"Programming Languages",items:[
+        {name:"Python",pct:92,color:"#3572a5"},
+        {name:"C#",pct:90,color:"#512bd4"},
+        {name:"SQL",pct:88,color:"#336791"},
+        {name:"JavaScript",pct:85,color:"#f7df1e"},
+        {name:"C / C++",pct:82,color:"#00599c"},
+        {name:"Bash",pct:80,color:"#4eaa25"},
+        {name:"PHP",pct:75,color:"#777bb4"},
+      ]},
+      {group:"Machine Learning & Data Science",items:[
+        {name:"Scikit-learn",pct:92,color:"#f7931e"},
+        {name:"Pandas & NumPy",pct:94,color:"#150458"},
+        {name:"TensorFlow & Keras",pct:88,color:"#ff6f00"},
+        {name:"SHAP & LIME (XAI)",pct:85,color:"#ff6f61"},
+        {name:"NLP & LLM Tuning",pct:82,color:"#c586c0"},
+        {name:"Librosa (Audio DSP)",pct:80,color:"#4ec9b0"},
+      ]},
+      {group:"Backend & Web Technologies",items:[
+        {name:"ASP.NET Core 9",pct:90,color:"#512bd4"},
+        {name:"FastAPI",pct:88,color:"#4ec9b0"},
+        {name:"React",pct:85,color:"#61dafb"},
+        {name:"Django & Flask",pct:82,color:"#092e20"},
+        {name:"Node.js",pct:80,color:"#339933"},
+        {name:"CapacitorJS & Kotlin",pct:78,color:"#119eff"},
+      ]},
+      {group:"Databases & ORMs",items:[
+        {name:"SQL Server",pct:88,color:"#cc2927"},
+        {name:"EF Core",pct:88,color:"#512bd4"},
+        {name:"SQLite",pct:85,color:"#003b57"},
+        {name:"MySQL",pct:85,color:"#00758f"},
+        {name:"MongoDB",pct:78,color:"#47a248"},
+      ]},
+      {group:"Architecture & Engineering Tooling",items:[
+        {name:"Git & GitHub",pct:95,color:"#f05032"},
+        {name:"RESTful API Design",pct:92,color:"#007acc"},
+        {name:"Clean Architecture",pct:90,color:"#b48eff"},
+        {name:"TDD (xUnit / pytest)",pct:88,color:"#4ec9b0"},
+        {name:"Agile / Scrum",pct:85,color:"#dcdcaa"},
+        {name:"Docker Containers",pct:80,color:"#2496ed"},
+        {name:"CI/CD Pipelines",pct:78,color:"#ff6f00"},
+      ]},
+    ];
+
+    const ALSO_FAMILIAR = [
+      "XGBoost", "Joblib", "Matplotlib", "Seaborn", "Power BI", "AWS Lex",
+      "Jupyter Notebooks", "JWT Authentication", "Cryptographic QR Protocols", "Finite State Machines", "HIPAA Architecture",
+      "Android Native (Kotlin)", "LLM Fine-Tuning", "Domain-Driven Design (DDD)", "Object-Oriented Design (SOLID)", "Unit Testing (xUnit/pytest)",
+      "Linux Systems Administration", "Continuous Integration (CI/CD)"
+    ];
+
+    const EXPERIENCE = [
+      {
+        date: "Sep 2024 — May 2025",
+        role: "Teaching Assistant – Data Structures & Algorithms",
+        company: "FAST NUCES, Peshawar",
+        desc: "Mentored 150+ undergraduate students across core Computer Science courses with a 95% satisfaction rating.",
+        bullets: [
+          "Mentored 150+ undergraduate engineering students in foundational and advanced Data Structures (trees, graphs, heaps, hash tables) and Algorithms (dynamic programming, greedy paradigms, asymptotic analysis), earning a 95% student satisfaction rating.",
+          "Conducted weekly hands-on laboratory sessions, leading live code debugging and resolving 50+ complex technical queries across C++ and Python.",
+          "Evaluated coursework for 3 concurrent academic offerings and developed supplementary algorithmic coding challenges to bridge theoretical concepts with production software practices."
+        ],
+        tags: ["Data Structures", "Algorithms", "C/C++", "Python", "Technical Mentorship", "Code Evaluation"],
+        current: false
+      },
+      {
+        date: "Jun 2024 — Jul 2024",
+        role: "Python Developer Intern",
+        company: "Osoltech, Lahore",
+        desc: "Automated manual data workflows, integrated RESTful APIs, and enforced Test-Driven Development (TDD).",
+        bullets: [
+          "Automated critical business workflows by developing Python data-parsing and file-handling utilities, cutting manual turnaround time significantly.",
+          "Integrated third-party RESTful APIs utilizing Python and JSON schemas, implementing robust HTTP retry mechanisms and structured error handling.",
+          "Spearheaded Test-Driven Development (TDD) protocols, authoring comprehensive unit test suites with unittest and pytest to enforce code reliability and prevent regression.",
+          "Collaborated actively in Agile sprint planning, standups, and peer code reviews, leveraging Git branching workflows and CI checks for seamless version control."
+        ],
+        tags: ["Python", "RESTful APIs", "TDD", "unittest", "pytest", "Git", "Agile / Scrum"],
+        current: false
+      },
+    ];
+
+    const LEADERSHIP = [
+      {
+        date: "Sep 2024 — Present",
+        role: "President",
+        company: "E-Gaming Society, FAST National University, Peshawar",
+        desc: "Directed cross-functional board, scaled active membership by 40%, and secured PKR 30K+ in sponsorships.",
+        bullets: [
+          "Directed a 20+ member cross-functional team across operations, broadcasting, and tournament logistics to execute 8 campus-wide competitions, scaling active membership by 40% (150 to 210 members).",
+          "Secured PKR 30,000+ in corporate sponsorships, strategically managing fiscal allocations, vendor relations, and promotional deliverables.",
+          "Orchestrated end-to-end event logistics and targeted digital marketing campaigns, engaging 500+ participants with zero operational downtime."
+        ],
+        tags: ["Executive Leadership", "Sponsorship Acquisition", "Budget Management", "Event Operations"],
+      },
+      {
+        date: "Sep 2023 — May 2024",
+        role: "Head of Media",
+        company: "GDSC (Google Developer Student Clubs), FAST National University, Peshawar",
+        desc: "Led 8-member media team, published 30+ campaign assets, and increased event attendance by 45%.",
+        bullets: [
+          "Led an 8-member creative media team producing 30+ campaign assets, motion graphics, and promotional videos, driving a 45% measured increase in campus event attendance.",
+          "Instituted training sessions in Adobe Creative Suite and digital marketing strategy for 5 junior associates, accelerating team delivery speed by 35%."
+        ],
+        tags: ["Media Strategy", "Creative Direction", "Adobe Creative Suite", "Team Mentorship", "GDSC"],
+      },
+    ];
+
+    const EDUCATION = [
+      {
+        icon: "🎓",
+        institution: "FAST – National University of Computer and Emerging Sciences",
+        university: "Peshawar, Pakistan",
+        degree: "Bachelor of Science in Computer Science",
+        minor: "Concentration: Software Engineering & Applied Machine Learning",
+        gpa: "",
+        period: "2022 — 2026",
+        courses: "Data Structures, Design & Analysis of Algorithms, Operating Systems, Database Systems, Software Engineering, Applied Machine Learning, Artificial Intelligence, Computer Networks, Object-Oriented Programming, Theory of Automata"
+      },
+      {
+        icon: "📚",
+        institution: "Punjab Group of Colleges",
+        university: "Multan, Pakistan",
+        degree: "Higher Secondary School Certificate (FSC Pre-Engineering)",
+        minor: "Major Subjects: Mathematics, Physics, Chemistry",
+        gpa: "",
+        period: "2020 — 2022",
+        courses: ""
+      }
+    ];
+
+    const CERTIFICATIONS = [
+      {
+        id: 1,
+        name: "National Skill Competency Test (NSCT)",
+        issuer: "Tech Pakistan – Higher Education Commission (HEC) Recognized",
+        icon: "🏆",
+        category: "Standardized Technical Assessment",
+        badge: "HEC Verified",
+        accent: "#f7931e",
+        date: "April 2026",
+        skills: ["Score: 57/100", "National Percentile: 80.6th"],
+        desc: "Standardized national examination recognized by the Higher Education Commission (HEC) of Pakistan, evaluating verified competencies across algorithms, object-oriented design, database architecture, and enterprise software engineering.",
+        link: "#",
+        certId: "NSCT_2026"
+      },
+    ];
+
+    const FOCUS_ITEMS = [
+      ["⚡","Clinical AI & Healthcare Systems: Engineering Ovula's ensemble ML models and cross-platform client with React & native Kotlin"],
+      ["🏛️","Enterprise Architecture: Designing decoupled, scalable ERP platforms using ASP.NET Core 9, EF Core & Clean Architecture"],
+      ["🛡️","Explainable AI (XAI): Implementing sub-50ms inference microservices using FastAPI, XGBoost, and SHAP/LIME explainability"],
+      ["📊","Production ML Pipelines: Building automated ingestion, feature engineering, and serialization workflows for risk & acoustic modeling"],
+      ["🧪","Rigorous Quality Assurance: Practicing Test-Driven Development (TDD) with xUnit & pytest to enforce regression resilience"],
+      ["🤝","Engineering Collaboration: Driving Agile sprint methodologies, CI/CD automation, and technical mentorship at FAST NUCES"],
+    ];
+
+    const SOCIALS = [
+      {label:"GitHub",key:"github",href:OWNER.links.github,color:"#e6edf3"},
+      {label:"LinkedIn",key:"linkedin",href:OWNER.links.linkedin,color:"#0a66c2"},
+      {label:"Email",key:"mail",href:OWNER.links.email,color:"#4ec9b0"},
+      {label:"Phone",key:"phone",href:OWNER.links.phone,color:"#fabd2f"},
+    ];
+
+    /* ═══════════════════════════════════════════════ */
+    /*  STATE                                         */
+    /* ═══════════════════════════════════════════════ */
+    let openTabs=["home"];
+    let activeFile="home";
+    let currentTheme="default";
+    let sidebarOpen=true;
+    let isMobile=window.innerWidth<1024;
+    let themePickerOpen=false;
+
+    /* ═══════════════════════════════════════════════ */
+    /*  TYPING ANIMATION                              */
+    /* ═══════════════════════════════════════════════ */
+    class TypeWriter{
+      constructor(s,sp=70,p=2000){this.strings=s;this.speed=sp;this.pause=p;this.idx=0;this.charIdx=0;this.deleting=false;this.text=""}
+      tick(cb){
+        const c=this.strings[this.idx];
+        if(this.deleting){
+          this.text=c.substring(0,this.charIdx-1);this.charIdx--;
+          if(this.charIdx<=0){this.deleting=false;this.idx=(this.idx+1)%this.strings.length;setTimeout(()=>this.tick(cb),this.speed);return cb(this.text)}
+          setTimeout(()=>this.tick(cb),28);
+        }else{
+          this.text=c.substring(0,this.charIdx+1);this.charIdx++;
+          if(this.charIdx>=c.length){setTimeout(()=>{this.deleting=true;this.tick(cb)},this.pause);return cb(this.text)}
+          setTimeout(()=>this.tick(cb),this.speed);
+        }
+        cb(this.text);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  SVG ICONS                                     */
+    /* ═══════════════════════════════════════════════ */
+    const I={
+      files:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>`,
+      search:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+      git:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/><line x1="12" y1="12" x2="12" y2="15"/></svg>`,
+      ext:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`,
+      settings:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`,
+      user:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+      chev:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>`,
+      branch:`<svg viewBox="0 0 16 16" fill="currentColor"><path d="M9.5 3.25a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6A1.5 1.5 0 0 0 4.5 10v.128a2.251 2.251 0 1 1-1 0V5.372a2.25 2.25 0 1 1 1 0v1.836A2.492 2.492 0 0 1 6 7h4a1.5 1.5 0 0 0 1.5-1.5v-.628A2.25 2.25 0 0 1 9.5 3.25z"/></svg>`,
+      bell:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
+      palette:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="12" r="1.5" fill="currentColor"/><circle cx="16" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/></svg>`,
+      sparkle:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5L12 2z"/></svg>`,
+      github:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>`,
+      linkedin:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
+      mail:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+      phone:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+      cert:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>`,
+    };
+
+    function socialIcon(key){ return I[key]||I.user; }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  RENDER HELPERS                                */
+    /* ═══════════════════════════════════════════════ */
+    function renderActivityBar(){
+      const el=document.getElementById("activity-bar");
+      el.innerHTML=`
+        <button class="ab-btn ${sidebarOpen?'active':''}" id="ab-files" title="Explorer">${I.files}</button>
+        <button class="ab-btn" id="ab-search" title="Search (Ctrl+P)">${I.search}</button>
+        <button class="ab-btn ${gitPopoverOpen?'active':''}" id="ab-git" title="Source Control">${I.git}</button>
+        <button class="ab-btn ${copilotOpen?'active':''}" id="ab-copilot" title="Hashir's Copilot Chat" style="color:#b48eff"><span style="font-size:16px">✦</span></button>
+        <div class="ab-spacer"></div>
+        <button class="ab-btn" id="ab-account" title="Account">${I.user}</button>
+        <button class="ab-btn ${settingsOpen?'active':''}" id="ab-settings" title="Settings">${I.settings}</button>
+      `;
+      document.getElementById("ab-files")?.addEventListener('click', () => {
+        sidebarOpen = !sidebarOpen;
+        document.getElementById("desktop-app").classList.toggle("sidebar-hidden", !sidebarOpen);
+        renderActivityBar();
+      });
+      document.getElementById("ab-search")?.addEventListener('click', openCmd);
+      document.getElementById("ab-git")?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleGitPopover();
+        renderActivityBar();
+      });
+      document.getElementById("ab-copilot")?.addEventListener('click', toggleCopilot);
+      document.getElementById("ab-account")?.addEventListener('click', () => navigateTo('about'));
+      document.getElementById("ab-settings")?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleSettings();
+      });
+    }
+
+    let settingsOpen = false;
+    function toggleSettings() {
+      settingsOpen = !settingsOpen;
+      const pop = document.getElementById('settings-popover');
+      if (pop) pop.classList.toggle('open', settingsOpen);
+      if (settingsOpen) renderSettingsThemeList();
+      renderActivityBar();
+    }
+    function closeSettings() {
+      settingsOpen = false;
+      const pop = document.getElementById('settings-popover');
+      if (pop) pop.classList.remove('open');
+      renderActivityBar();
+    }
+    function renderSettingsThemeList() {
+      const el = document.getElementById('settings-theme-list');
+      if (!el) return;
+      el.innerHTML = THEMES.map(t => `
+        <div class="settings-theme-item ${t.id === currentTheme ? 'active' : ''}" onclick="setTheme('${t.id}');renderSettingsThemeList()">
+          <div class="settings-theme-left">
+            <span class="settings-theme-dot" style="background:${t.dot}"></span>
+            <span>${t.emoji} ${t.name}</span>
+          </div>
+          ${t.id === currentTheme ? '<span class="settings-theme-check">✓</span>' : ''}
+        </div>
+      `).join('');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    let gitPopoverOpen = false;
+    function toggleGitPopover() {
+      gitPopoverOpen = !gitPopoverOpen;
+      const el = document.getElementById('git-popover');
+      if (el) el.classList.toggle('open', gitPopoverOpen);
+    }
+    function closeGitPopover() {
+      gitPopoverOpen = false;
+      const el = document.getElementById('git-popover');
+      if (el) el.classList.remove('open');
+    }
+
+    function renderSidebar(){
+      const el=document.getElementById("sidebar");
+      el.innerHTML=`
+        <div class="sidebar-header"><span>Explorer</span></div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">${I.chev} PORTFOLIO</div>
+          <div id="sidebar-files">
+            ${FILES.map(f=>`<div class="file-item ${f.id===activeFile?'active':''}" data-file="${f.id}"><span class="file-icon">${f.icon}</span><span>${f.name}</span></div>`).join('')}
+          </div>
+        </div>
+        <div class="sidebar-copilot">
+          <button class="copilot-btn" id="sidebar-copilot-btn"><span class="sparkle">${I.sparkle}</span> Hashir's Copilot <span style="margin-left:auto;opacity:.5;font-size:10px">AI</span></button>
+        </div>`;
+      el.querySelectorAll('.file-item').forEach(i=>i.addEventListener('click',()=>navigateTo(i.dataset.file)));
+      document.getElementById('sidebar-copilot-btn')?.addEventListener('click', toggleCopilot);
+    }
+
+    function renderTabs(){
+      const el=document.getElementById("tab-bar");
+      el.innerHTML=openTabs.map(id=>{
+        const f=FILES.find(x=>x.id===id);
+        return`<div class="tab ${id===activeFile?'active':''}" data-tab="${id}"><span style="font-size:13px">${f.icon}</span><span>${f.name}</span><span class="tab-close" data-close="${id}">×</span></div>`;
+      }).join('');
+      el.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',e=>{if(!e.target.closest('.tab-close'))navigateTo(t.dataset.tab)}));
+      el.querySelectorAll('.tab-close').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();closeTab(b.dataset.close)}));
+    }
+
+    function renderBreadcrumb(){
+      const el=document.getElementById("breadcrumb");
+      const f=FILES.find(x=>x.id===activeFile);
+      el.innerHTML=`<span class="sep">~/</span> muhammad-hashir <span class="sep">›</span> src <span class="sep">›</span> ${f?f.name:activeFile}`;
+    }
+
+    function renderStatusBar(id="statusbar"){
+      const el=document.getElementById(id);
+      const f=FILES.find(x=>x.id===activeFile);
+      const t=THEMES.find(x=>x.id===currentTheme);
+      const timeStr=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',hour12:false});
+      el.innerHTML=`
+        <div class="statusbar-left">
+          <span class="sb-item">${I.branch} main</span>
+          <span class="sb-item">↑1 +3</span>
+          <span class="sb-item">⚡ Muhammad Hashir</span>
+        </div>
+        <div class="statusbar-right">
+          <span class="sb-item" onclick="toggleCopilot()"><span style="color:#b48eff">✦</span> Copilot</span>
+          <span class="sb-item">${f?f.ext:''}</span>
+          <span class="sb-item">UTF-8</span>
+          <span class="sb-item">Prettier</span>
+          <span class="sb-item sb-theme-btn" id="${id}-theme-btn">🎨 ${t?t.name:'Hashir Dark'}</span>
+          <span class="sb-item statusbar-clock" id="${id}-clock">${timeStr}</span>
+        </div>`;
+      document.getElementById(`${id}-theme-btn`)?.addEventListener('click',e=>{e.stopPropagation();toggleThemePicker()});
+    }
+
+    function renderThemePicker(){
+      const el=document.getElementById("theme-picker");
+      el.innerHTML=THEMES.map(t=>`<button class="theme-option ${t.id===currentTheme?'active':''}" data-theme="${t.id}"><span class="theme-dot" style="background:${t.dot}"></span>${t.name}</button>`).join('');
+      el.querySelectorAll('.theme-option').forEach(b=>b.addEventListener('click',()=>{setTheme(b.dataset.theme);themePickerOpen=false;el.classList.remove('open')}));
+    }
+
+    let cmdSelectedIndex = 0;
+
+    function renderCommandPalette(){
+      const el=document.getElementById("cmd-list");
+      const q=document.getElementById("cmd-input").value.toLowerCase().trim();
+
+      const commands=[
+        {icon:"✦",label:"Open Portfolio AI Assistant",action:"toggleCopilot",shortcut:"Ctrl+Shift+C"},
+        {icon:"📋",label:"Toggle File Explorer Sidebar",action:"toggle:sidebar",shortcut:"Ctrl+B"},
+        {icon:"💻",label:"Toggle Integrated Terminal",action:"toggleTerminal",shortcut:"Ctrl+`"},
+        {icon:"📄",label:"Download Curriculum Vitae (PDF)",action:"resume",shortcut:""},
+        {icon:"🎨",label:"Theme: Hashir Dark",action:"theme:default",shortcut:""},
+        {icon:"🎨",label:"Theme: Tokyo Night",action:"theme:tokyo-night",shortcut:""},
+        {icon:"🎨",label:"Theme: Catppuccin",action:"theme:catppuccin",shortcut:""},
+        {icon:"🎨",label:"Theme: Nord",action:"theme:nord",shortcut:""},
+      ];
+
+      const files=[
+        {icon:"⚛️",label:"home.tsx",path:"src/",action:"home"},
+        {icon:"📄",label:"about.html",path:"src/",action:"about"},
+        {icon:"📁",label:"projects.js",path:"src/",action:"projects"},
+        {icon:"🔧",label:"skills.json",path:"data/",action:"skills"},
+        {icon:"💼",label:"experience.ts",path:"src/",action:"experience"},
+        {icon:"✉️",label:"contact.css",path:"src/",action:"contact"},
+        {icon:"📋",label:"README.md",path:"./",action:"readme"},
+        {icon:"📄",label:"Hashir_cv.pdf",path:"./",action:"resume"},
+      ];
+
+      const matchedCommands=commands.filter(c=>c.label.toLowerCase().includes(q)||"copilot".includes(q));
+      const matchedFiles=files.filter(f=>f.label.toLowerCase().includes(q)||f.path.toLowerCase().includes(q));
+
+      let allItems=[];
+      let html="";
+
+      if(matchedCommands.length>0){
+        html+=`<div class="cmd-group-title">COMMANDS</div>`;
+        matchedCommands.forEach(c=>{
+          const idx=allItems.length;
+          allItems.push(c);
+          html+=`
+            <div class="cmd-item ${idx===cmdSelectedIndex?'highlighted':''}" data-index="${idx}" data-action="${c.action}">
+              <div class="cmd-item-left">
+                <span class="cmd-item-icon" style="color:#b48eff">${c.icon}</span>
+                <span>${c.label}</span>
+              </div>
+              <span class="cmd-item-right">${c.shortcut||''}</span>
+            </div>`;
+        });
+      }
+
+      if(matchedFiles.length>0){
+        html+=`<div class="cmd-group-title">FILES</div>`;
+        matchedFiles.forEach(f=>{
+          const idx=allItems.length;
+          allItems.push(f);
+          html+=`
+            <div class="cmd-item ${idx===cmdSelectedIndex?'highlighted':''}" data-index="${idx}" data-action="${f.action}">
+              <div class="cmd-item-left">
+                <span class="cmd-item-icon">${f.icon}</span>
+                <span>${f.label}</span>
+              </div>
+              <span class="cmd-item-right">${f.path}</span>
+            </div>`;
+        });
+      }
+
+      if(allItems.length===0){
+        html=`<div style="padding:16px;text-align:center;color:var(--dim);font-size:12px">No matching commands or files found</div>`;
+      }
+
+      el.innerHTML=html;
+      el.querySelectorAll('.cmd-item').forEach(item=>{
+        item.addEventListener('click',()=>execCommand(item.dataset.action));
+      });
+    }
+
+    function openCmd(){
+      cmdSelectedIndex=0;
+      document.getElementById("cmd-overlay").classList.add("open");
+      const input=document.getElementById("cmd-input");
+      input.value="";
+      input.focus();
+      renderCommandPalette();
+    }
+    function closeCmd(){document.getElementById("cmd-overlay").classList.remove("open")}
+    function execCommand(a){
+      if(!a)return;
+      if(a==="toggleCopilot")toggleCopilot();
+      else if(a.startsWith("theme:"))setTheme(a.replace("theme:",""));
+      else if(a==="toggle:sidebar"){sidebarOpen=!sidebarOpen;document.getElementById("desktop-app").classList.toggle("sidebar-hidden",!sidebarOpen)}
+      else if(a==="toggleTerminal")toggleTerminal();
+      else navigateTo(a);
+      closeCmd();
+    }
+
+    function updateCmdHighlight(){
+      document.querySelectorAll('.cmd-item').forEach((item,idx)=>{
+        item.classList.toggle('highlighted',idx===cmdSelectedIndex);
+        if(idx===cmdSelectedIndex)item.scrollIntoView({block:'nearest'});
+      });
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  SECTION RENDERERS                             */
+    /* ═══════════════════════════════════════════════ */
+    function renderHome(){
+      return`<div class="home-wrapper"><div class="home-content">
+        <p class="home-greeting">// Software Engineer &amp; Applied Machine Learning Specialist</p>
+        <h1 class="home-name" style="font-size:clamp(34px,5.5vw,68px)">${OWNER.firstName}<br><em class="accent-name">${OWNER.lastName}</em></h1>
+        <div class="home-badges">
+          ${[["#4ec9b0","Software Engineer"],["#ff6fd8","Applied ML &amp; AI"],["#4fc1ff","Enterprise .NET &amp; C#"]].map(([c,t])=>`<div class="badge"><span class="badge-dot" style="background:${c}"></span>${t}</div>`).join('')}
+          <div class="badge badge-accent"><span class="badge-dot"></span>BS CS @ FAST NUCES ('26)</div>
+        </div>
+        <div class="home-typing"><span id="typing-text"></span><span class="typing-cursor">|</span></div>
+        <p class="home-bio">${OWNER.bio}</p>
+        <div class="home-buttons">
+          <button class="btn-primary" onclick="navigateTo('projects')">📁 Explore Projects</button>
+          <button class="btn-outline" onclick="navigateTo('about')">👤 Professional Profile</button>
+          <button class="btn-outline" onclick="navigateTo('resume')">📄 Curriculum Vitae</button>
+          <button class="btn-outline" onclick="navigateTo('contact')">✉ Inquiries</button>
+        </div>
+
+        <div class="social-links">
+          ${SOCIALS.map(s=>`<a href="${s.href}" target="_blank" rel="noreferrer" class="social-link" onmouseenter="this.style.borderColor='${s.color}66';this.style.color='var(--bright)';this.style.background='${s.color}15'" onmouseleave="this.style.borderColor='';this.style.color='';this.style.background=''"><span style="display:flex;align-items:center;color:${s.color};flex-shrink:0">${socialIcon(s.key)}</span>${s.label}</a>`).join('')}
+        </div>
+      </div></div>`;
+    }
+
+    function renderAbout(){
+      return`<div class="section-wrapper">
+        <p class="section-comment">&lt;!-- about.html — Engineering Profile &amp; Academic Credentials --&gt;</p>
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">// Core Specializations · System Architecture Principles · Academic Formation</p>
+        <div class="reveal card">
+          <p style="font-size:13px;color:var(--text);line-height:1.9">I am <strong style="color:var(--blue);font-weight:600">${OWNER.name}</strong>, a Software Engineer and senior Computer Science student at <strong style="color:var(--blue);font-weight:600">FAST – National University of Computer and Emerging Sciences (FAST NUCES), Peshawar</strong>. My engineering expertise centers on <strong style="color:var(--blue);font-weight:600">Python, C# (.NET Core), and Applied Machine Learning</strong>, with a demonstrated record of designing scalable enterprise platforms, cross-platform applications, and production-grade ML inference pipelines. I specialize in <strong style="color:var(--blue);font-weight:600">Clean Architecture</strong> to isolate domain business rules, rigorous <strong style="color:var(--blue);font-weight:600">Test-Driven Development (TDD)</strong> for defect prevention, and modern CI/CD patterns for dependable automated delivery.</p>
+        </div>
+        
+        <div class="reveal card" style="margin-top:12px">
+          <div class="subheading">Technical Focus &amp; Core Competencies</div>
+          <div class="focus-grid">${FOCUS_ITEMS.map(([e,t])=>`<div class="focus-item"><span>${e}</span><span>${t}</span></div>`).join('')}</div>
+        </div>
+
+        <div class="reveal" style="margin-top:24px">
+          <div class="subheading">Academic Formation</div>
+          ${EDUCATION.map(e=>`<div class="edu-card">
+            <div style="display:flex;justify-content:space-between;align-items:start;gap:16px;margin-bottom:4px">
+              <div><span style="font-size:15px;font-weight:600;color:var(--bright)">${e.icon} ${e.institution}</span><br><span style="font-size:13px;color:var(--dim)">${e.university}</span></div>
+              <span style="font-size:13px;color:var(--dim);white-space:nowrap">${e.period}</span>
+            </div>
+            <p style="font-size:12px;color:var(--blue);margin-top:6px">${e.degree}${e.minor ? ' &nbsp;|&nbsp; <strong style="color:var(--teal)">'+e.minor+'</strong>' : ''}</p>
+            ${e.courses ? `<p style="font-size:12px;color:var(--dim);margin-top:6px;line-height:1.6"><strong style="color:var(--text);font-weight:500">Core Coursework:</strong> ${e.courses}</p>` : ''}
+          </div>`).join('')}
+        </div>
+
+        <div class="reveal" style="margin-top:24px">
+          <div class="subheading">Leadership &amp; Institutional Impact</div>
+          <div class="timeline">
+          ${LEADERSHIP.map(e=>`<div class="tl-entry reveal">
+            <div class="tl-date">${e.date}</div>
+            <div class="tl-role">${e.role}</div>
+            <div class="tl-company">@ ${e.company}</div>
+            <ul class="tl-desc-list">${e.bullets ? e.bullets.map(b=>`<li>${b}</li>`).join('') : `<li>${e.desc}</li>`}</ul>
+            <div class="tl-tags">${e.tags.map(t=>`<span class="tl-tag">${t}</span>`).join('')}</div>
+          </div>`).join('')}
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:24px">
+          <div class="subheading">Standardized Assessments &amp; Certifications</div>
+          ${CERTIFICATIONS.map(c=>`<div class="card" style="padding:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <span style="font-size:14px;font-weight:600;color:var(--bright)">${c.icon} ${c.name}</span>
+              <span style="font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(180,142,255,.15);color:#b48eff;font-weight:600">${c.badge}</span>
+            </div>
+            <p style="font-size:12px;color:var(--dim);margin-bottom:6px">${c.issuer} · ${c.date}</p>
+            <p style="font-size:12px;color:var(--dim);line-height:1.6">${c.desc}</p>
+            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">${c.skills.map(s=>`<span class="project-tag" style="color:var(--teal);border-color:rgba(78,201,176,.3)">${s}</span>`).join('')}</div>
+          </div>`).join('')}
+        </div>
+
+        <div class="reveal" style="margin-top:24px">
+          <div class="subheading">Communication &amp; Languages</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <span class="badge" style="background:rgba(255,255,255,.05);font-size:12px;padding:6px 12px">🗣 English — Professional Working Proficiency</span>
+            <span class="badge" style="background:rgba(255,255,255,.05);font-size:12px;padding:6px 12px">🗣 Urdu — Native / Bilingual Proficiency</span>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function renderProjects(){
+      return`<div class="section-wrapper wide">
+        <p class="section-comment">// projects.js — Systems Architecture &amp; Production Deployments</p>
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">// Enterprise architectures, clinical diagnostic systems, and explainable ML inference pipelines</p>
+        <div class="projects-grid">
+          ${PROJECTS.map(p=>`<div class="project-card reveal" style="--card-accent:${p.accent}">
+            <div class="project-icon">${p.icon}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <div class="project-type" style="color:${p.accent}">${p.type}</div>
+              <div class="project-links"><a href="${p.link}" target="_blank" rel="noreferrer" class="project-link">Repository ↗</a></div>
+            </div>
+            <div class="project-name">${p.name}</div>
+            <p class="project-desc">${p.desc}</p>
+            <div class="project-tags">${p.tags.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
+          </div>`).join('')}
+        </div>
+      </div>`;
+    }
+
+    function renderSkills(){
+      return`<div class="section-wrapper">
+        <p class="section-comment">// skills.json — Core Competencies, Frameworks &amp; Tooling</p>
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-subtitle">{ "domain": "Software_Engineering", "specialization": "Enterprise_NET_and_Applied_ML" }</p>
+        <div class="skills-grid" style="margin-bottom:32px">
+          ${SKILL_GROUPS.map(g=>`<div class="reveal">
+            <div class="skill-group-title">${g.group}</div>
+            ${g.items.map(s=>`<div class="skill-row" data-pct="${s.pct}">
+              <span class="skill-name">${s.name}</span>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="background:${s.color}"></div></div>
+              <span class="skill-pct" style="color:${s.color}">${s.pct}%</span>
+            </div>`).join('')}
+          </div>`).join('')}
+        </div>
+        <div class="reveal">
+          <div class="skill-group-title">Also familiar with</div>
+          <div class="also-familiar">${ALSO_FAMILIAR.map(t=>`<span class="familiar-tag">${t}</span>`).join('')}</div>
+        </div>
+      </div>`;
+    }
+
+    function renderExperience(){
+      return`<div class="section-wrapper">
+        <p class="section-comment">// experience.ts — Professional Engineering Track Record</p>
+        <h2 class="section-title">Experience</h2>
+        <p class="section-subtitle">// Industry internships, technical mentorship, and engineering leadership</p>
+        
+        <div class="subheading">Professional Engineering &amp; Mentorship</div>
+        <div class="timeline">
+          ${EXPERIENCE.map(e=>`<div class="tl-entry reveal ${e.current?'':'dimmed'}">
+            <div class="tl-date">${e.date}</div>
+            <div class="tl-role">${e.role}</div>
+            <div class="tl-company">@ ${e.company}</div>
+            <ul class="tl-desc-list">${e.bullets ? e.bullets.map(b=>`<li>${b}</li>`).join('') : `<li>${e.desc}</li>`}</ul>
+            <div class="tl-tags">${e.tags.map(t=>`<span class="tl-tag">${t}</span>`).join('')}</div>
+          </div>`).join('')}
+        </div>
+
+        <div class="subheading" style="margin-top:32px">Leadership &amp; Organizational Directorship</div>
+        <div class="timeline">
+          ${LEADERSHIP.map(e=>`<div class="tl-entry reveal">
+            <div class="tl-date">${e.date}</div>
+            <div class="tl-role">${e.role}</div>
+            <div class="tl-company">@ ${e.company}</div>
+            <ul class="tl-desc-list">${e.bullets ? e.bullets.map(b=>`<li>${b}</li>`).join('') : `<li>${e.desc}</li>`}</ul>
+            <div class="tl-tags">${e.tags.map(t=>`<span class="tl-tag">${t}</span>`).join('')}</div>
+          </div>`).join('')}
+        </div>
+      </div>`;
+    }
+
+    function renderContact(){
+      const links=[
+        {icon:I.mail,label:"Email",value:OWNER.email,href:OWNER.links.email,color:"#4ec9b0"},
+        {icon:I.phone,label:"Phone",value:OWNER.phone,href:OWNER.links.phone,color:"#fabd2f"},
+        {icon:I.linkedin,label:"LinkedIn",value:"Muhammad Hashir",href:OWNER.links.linkedin,color:"#0a66c2"},
+        {icon:I.github,label:"GitHub",value:"github.com/hashirch",href:OWNER.links.github,color:"#e6edf3"},
+      ];
+      return`<div class="section-wrapper">
+        <p class="section-comment">/* contact.css — Professional Inquiries &amp; Technical Collaboration */</p>
+        <h2 class="section-title">Contact</h2>
+        <p class="section-subtitle">// Available for software engineering positions, machine learning roles, and technical partnerships</p>
+        <div class="contact-grid">
+          <div>
+            <div class="subheading">Direct Channels</div>
+            ${links.map(c=>`<a href="${c.href}" target="${c.label==='Email'||c.label==='Phone'?'_self':'_blank'}" rel="noreferrer" class="contact-link-item reveal"
+              onmouseenter="this.style.borderColor='${c.color}55';this.style.background='${c.color}12'"
+              onmouseleave="this.style.borderColor='';this.style.background='rgba(255,255,255,.01)'">
+              <span class="contact-icon-box" style="color:${c.color};background:${c.color}15;border:1px solid ${c.color}33">${c.icon}</span>
+              <div style="min-width:0"><div class="contact-label" style="color:${c.color}">${c.label}</div><div class="contact-value">${c.value}</div></div>
+              <span class="contact-arrow">↗</span>
+            </a>`).join('')}
+          </div>
+          <div class="reveal">
+            <div class="subheading">Send a Message</div>
+            <form id="contact-form" onsubmit="handleContactSubmit(event)">
+              <div class="form-group"><label class="form-label">Full Name / Organization <span class="req">*</span></label><input class="form-input" name="name" type="text" placeholder="e.g., Alex Johnson / Enterprise Corp" required /></div>
+              <div class="form-group"><label class="form-label">Email Address <span class="req">*</span></label><input class="form-input" name="email" type="email" placeholder="e.g., alex@company.com" required /></div>
+              <div class="form-group"><label class="form-label">Subject / Purpose of Inquiry</label><input class="form-input" name="subject" type="text" placeholder="e.g., Software Engineering Role Discussion" /></div>
+              <div class="form-group"><label class="form-label">Message Details <span class="req">*</span></label><textarea class="form-input" name="message" placeholder="Provide details regarding the project scope, technical requirements, or opportunity..." required></textarea></div>
+              <button class="btn-send" type="submit">Submit Inquiry →</button>
+            </form>
+            <p class="form-note">// Inquiries are transmitted directly to Hashir's inbox (${OWNER.email})</p>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function renderReadme(){
+      return`<div class="section-wrapper" style="max-width:800px">
+        <h1 style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--bright);padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:12px">${OWNER.name}</h1>
+        <p style="font-size:13px;color:var(--dim);line-height:1.6;margin-bottom:10px">${OWNER.role} · ${OWNER.subtitle} · ${OWNER.location}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px">
+          ${[["🔵","Python","#3572a5"],["⚙️","C# / .NET 9","#512bd4"],["🧠","Applied Machine Learning","#ff6fd8"],["⚡","FastAPI","#4ec9b0"],["🛡️","Clean Architecture","#4fc1ff"],["🏛️","Entity Framework Core","#512bd4"]].map(([e,n,c])=>`<span class="readme-badge" style="background:${c}22;border-color:${c};color:${c}">${e} ${n}</span>`).join('')}
+        </div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+        <h2 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--bright);margin-bottom:8px">Executive Summary</h2>
+        <p style="font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:12px">${OWNER.bio}</p>
+        <ul style="padding-left:20px;margin-bottom:14px">
+          ${[["🩺","Ovula (Final Year Project):","AI-powered PCOS diagnostic assistant combining React/CapacitorJS, native Kotlin modules, and an asynchronous FastAPI backend integrated with a fine-tuned LLM (87% diagnostic accuracy)."],
+             ["🏛️","Smart University Management System:","Enterprise-grade ERP architected with ASP.NET Core 9, Clean Architecture, QR-code anti-duplicate attendance, and a 47-test xUnit suite."],
+             ["🛡️","PhishShield-XAI:","Adversarial-resistant cybersecurity microservice achieving sub-50ms inference with SHAP and LIME model explainability."],
+             ["📊","Credit Risk Machine Learning Pipeline:","Production-grade financial underwriting pipeline automating data preprocessing, model selection, and Joblib serialization."],
+             ["🎤","Speech Emotion Recognition:","Acoustic feature extraction (MFCCs, Mel Spectrograms) via Librosa and hybrid CNN-LSTM neural networks."]].map(([e,a,b])=>`<li style="font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:6px">${e} <strong style="color:var(--text);font-weight:600">${a}</strong> ${b}</li>`).join('')}
+        </ul>
+        <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+        <h2 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--bright);margin-bottom:8px">Core Technology Matrix</h2>
+        ${[["Languages",["Python","C#","SQL","JavaScript","C/C++","Bash","PHP"]],
+           ["Machine Learning & Data",["Scikit-learn","TensorFlow","Keras","Pandas","NumPy","SHAP","LIME","Librosa","LLM Fine-Tuning"]],
+           ["Backend & Full-Stack",["ASP.NET Core 9","FastAPI","React","Django","Flask","Node.js","CapacitorJS","Kotlin"]],
+           ["Databases & ORMs",["SQL Server","Entity Framework Core","SQLite","MySQL","MongoDB"]],
+           ["Architecture & DevOps",["Clean Architecture","Test-Driven Development (TDD)","Docker","Git/GitHub","CI/CD","xUnit","pytest"]]].map(([cat,items])=>`<p style="font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:6px"><strong style="color:var(--text);font-weight:600">${cat}:</strong> ${items.map(i=>`<code class="readme-code">${i}</code>`).join(' ')}</p>`).join('')}
+        <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+        <h2 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--bright);margin-bottom:8px">Communication &amp; Professional Links</h2>
+        <ul style="padding-left:20px;margin-bottom:16px">
+          ${[["Email",OWNER.email,OWNER.links.email],
+             ["Phone",OWNER.phone,OWNER.links.phone],
+             ["LinkedIn","linkedin.com/in/muhammad-hashir-chaudhary-07225136b",OWNER.links.linkedin],
+             ["GitHub","github.com/hashirch",OWNER.links.github]].map(([k,v,h])=>`<li style="font-size:13px;color:var(--dim);line-height:1.8">${k}: <a href="${h}" target="_blank" style="color:var(--blue);text-decoration:underline">${v}</a></li>`).join('')}
+        </ul>
+        <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <p style="font-size:12px;color:var(--dim)">© ${new Date().getFullYear()} Muhammad Hashir · Software Engineer</p>
+          <p style="font-size:12px;color:var(--dim)">FAST NUCES, Peshawar, Pakistan</p>
+        </div>
+      </div>`;
+    }
+
+    function handleContactSubmit(e){
+      e.preventDefault();
+      const btn=e.target.querySelector('.btn-send');
+      btn.textContent="✓ Inquiry Submitted Successfully";btn.style.background="rgba(78,201,176,.25)";btn.style.color="#4ec9b0";btn.disabled=true;
+      e.target.reset();
+      showToast('Inquiry transmitted to hashirchbss@gmail.com');
+      setTimeout(()=>{btn.textContent="Submit Inquiry →";btn.style.background="";btn.style.color="";btn.disabled=false},3500);
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  NAVIGATION                                    */
+    /* ═══════════════════════════════════════════════ */
+    function navigateTo(id){
+      if(!openTabs.includes(id))openTabs.push(id);
+      activeFile=id;render();closeMobileNav();
+    }
+    function closeTab(id){
+      openTabs=openTabs.filter(t=>t!==id);
+      if(!openTabs.length)openTabs=["home"];
+      if(activeFile===id)activeFile=openTabs[openTabs.length-1];
+      render();
+    }
+    function renderResume(){
+      return `<div class="section-wrapper wide" style="max-width:980px;padding:2rem 1.5rem">
+        <p class="section-comment">// Hashir_cv.pdf — Verified Curriculum Vitae Document</p>
+        <h2 class="section-title">Curriculum Vitae</h2>
+        <p class="section-subtitle">// Muhammad Hashir · Software Engineer &amp; ML Specialist · FAST NUCES CS ('26)</p>
+        
+        <div class="card reveal" style="padding:1.25rem 1.5rem;margin-top:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:12px">
+            <div style="display:flex;align-items:center;gap:12px;text-align:left">
+              <div style="font-size:32px">📄</div>
+              <div>
+                <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--bright)">Hashir_cv.pdf</div>
+                <div style="font-size:12px;color:var(--dim)">103.6 KB · Official Curriculum Vitae · BS Computer Science @ FAST NUCES</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button onclick="triggerResumeDownload()" class="btn-primary" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">⬇ Download CV (PDF)</button>
+              <a href="Hashir_cv.pdf" target="_blank" class="btn-outline" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none">Open in New Window ↗</a>
+            </div>
+          </div>
+          
+          <div class="pdf-iframe-container">
+            <iframe src="Hashir_cv.pdf" style="width:100%;height:100%;border:none;" title="Muhammad Hashir Curriculum Vitae"></iframe>
+          </div>
+          
+          <div class="pdf-mobile-fallback">
+            <p style="font-size:13px;color:var(--text);margin-bottom:12px">The integrated PDF viewer is optimized for desktop displays. Use the actions below to open or download the complete curriculum vitae.</p>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+              <a href="Hashir_cv.pdf" target="_blank" class="btn-primary">View Full PDF ↗</a>
+              <button onclick="triggerResumeDownload()" class="btn-outline">Download PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function getActiveContent(){
+      switch(activeFile){
+        case"home":return renderHome();case"about":return renderAbout();
+        case"projects":return renderProjects();case"skills":return renderSkills();
+        case"experience":return renderExperience();case"contact":return renderContact();
+        case"readme":return renderReadme();
+        case"resume":return renderResume();
+        default:return`<div style="padding:24px;color:var(--dim);font-size:12px">File not found</div>`;
+      }
+    }
+
+    function setTheme(id){
+      currentTheme=id;
+      document.documentElement.setAttribute("data-theme",id);
+      document.querySelectorAll('[data-theme-choice]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.themeChoice === id);
+      });
+      render();
+    }
+    function toggleThemePicker(){
+      themePickerOpen=!themePickerOpen;
+      const el=document.getElementById("theme-picker");
+      if(el){
+        el.classList.toggle("open",themePickerOpen);
+        if(themePickerOpen)renderThemePicker();
+      }
+    }
+
+    /* Mobile nav */
+    function openMobileNav(){
+      document.getElementById("mobile-nav-overlay").classList.add("open");
+      document.getElementById("mobile-nav").classList.add("open");
+      renderMobileNav();
+    }
+    function closeMobileNav(){
+      document.getElementById("mobile-nav-overlay").classList.remove("open");
+      document.getElementById("mobile-nav").classList.remove("open");
+    }
+    function renderMobileNav(){
+      const el=document.getElementById("mobile-nav");
+      el.innerHTML=`<div class="mobile-nav-title">Explorer — Muhammad Hashir</div>
+        ${FILES.map(f=>`<button class="mobile-nav-item ${f.id===activeFile?'active':''}" data-file="${f.id}"><span class="micon">${f.icon}</span>${f.name}</button>`).join('')}
+        <div style="padding:10px 16px;border-top:1px solid var(--border);margin-top:8px;display:flex;flex-direction:column;gap:6px">
+          <button class="copilot-btn" onclick="closeMobileNav();toggleCopilot()" style="justify-content:center"><span class="sparkle">✦</span> Portfolio AI Assistant</button>
+          <button class="btn-outline" onclick="triggerResumeDownload()" style="justify-content:center;padding:6px 12px;font-size:11px">⬇ Download CV (PDF)</button>
+        </div>
+        <div class="mobile-theme-section"><div class="mlabel">Color Theme</div><div class="mobile-theme-grid">
+          ${THEMES.map(t=>`<button class="mobile-theme-btn ${t.id===currentTheme?'active':''}" data-theme="${t.id}">${t.name}</button>`).join('')}
+        </div></div>`;
+      el.querySelectorAll('.mobile-nav-item').forEach(b=>b.addEventListener('click',()=>navigateTo(b.dataset.file)));
+      el.querySelectorAll('.mobile-theme-btn').forEach(b=>b.addEventListener('click',()=>{setTheme(b.dataset.theme);renderMobileNav()}));
+    }
+
+    /* Reveal + skill bars */
+    function initReveal(){document.querySelectorAll('.reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*70))}
+    function initSkillBars(){
+      const obs=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{if(e.isIntersecting){const f=e.target.querySelector('.skill-bar-fill');if(f)f.style.width=e.target.dataset.pct+'%'}});
+      },{threshold:.2});
+      document.querySelectorAll('.skill-row').forEach(b=>obs.observe(b));
+    }
+
+    /* Custom cursor */
+    function initCursor(){
+      if(isMobile)return;
+      document.body.classList.add('custom-cursor');
+      const outer=document.getElementById('cursor-outer'),inner=document.getElementById('cursor-inner');
+      if(!outer||!inner)return;
+      let mx=-100,my=-100,ox=-100,oy=-100;
+      window.addEventListener('mousemove',e=>{
+        mx=e.clientX;my=e.clientY;
+        inner.style.left=mx+'px';inner.style.top=my+'px';
+        const t=document.elementFromPoint(mx,my);
+        const ia=t&&(t.closest('a')||t.closest('button')||t.closest('input')||t.closest('textarea'));
+        if(ia){
+          outer.style.width='38px';outer.style.height='38px';
+          outer.style.borderColor='rgba(78,201,176,.8)';outer.style.background='rgba(78,201,176,.06)';
+          inner.style.background='#4ec9b0';inner.style.boxShadow='0 0 6px rgba(78,201,176,.7)';
+        }else{
+          outer.style.width='26px';outer.style.height='26px';
+          outer.style.borderColor='rgba(255,255,255,.55)';outer.style.background='transparent';
+          inner.style.background='rgba(255,255,255,.9)';inner.style.boxShadow='0 0 6px rgba(255,255,255,.5)';
+        }
+      });
+      (function anim(){ox+=(mx-ox)*.15;oy+=(my-oy)*.15;outer.style.left=ox+'px';outer.style.top=oy+'px';requestAnimationFrame(anim)})();
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  MAIN RENDER                                   */
+    /* ═══════════════════════════════════════════════ */
+    let typingInit=false;
+    function render(){
+      isMobile=window.innerWidth<1024;
+      const content=getActiveContent();
+      if(!isMobile){renderActivityBar();renderSidebar();renderTabs();renderBreadcrumb();document.getElementById("editor-content").innerHTML=content;renderStatusBar("statusbar")}
+      const mp=document.getElementById("mobile-path-name");
+      if(mp)mp.textContent=activeFile;
+      const mc=document.getElementById("mobile-content");
+      if(mc)mc.innerHTML=content;
+      renderStatusBar("mobile-statusbar");
+      requestAnimationFrame(()=>{initReveal();initSkillBars();initTyping()});
+    }
+    function initTyping(){
+      const el=document.getElementById('typing-text');
+      if(!el||typingInit)return;typingInit=true;
+      const tw=new TypeWriter(TYPING_STRINGS,65,2000);
+      tw.tick(t=>{const e=document.getElementById('typing-text');if(e)e.textContent=t});
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  MENUBAR DROPDOWN SYSTEM                       */
+    /* ═══════════════════════════════════════════════ */
+    let activeMenu = null;
+
+    function toggleMenu(menuName) {
+      if (activeMenu === menuName) {
+        closeAllMenus();
+      } else {
+        closeAllMenus();
+        activeMenu = menuName;
+        const dd = document.getElementById(`dropdown-${menuName}`);
+        const btn = document.querySelector(`[data-menu="${menuName}"]`);
+        if (dd) dd.classList.add('open');
+        if (btn) btn.classList.add('open');
+        if (menuName === 'file') renderRecentFiles();
+      }
+    }
+
+    function closeAllMenus() {
+      activeMenu = null;
+      document.querySelectorAll('.menu-dropdown').forEach(dd => dd.classList.remove('open'));
+      document.querySelectorAll('.menu-trigger').forEach(btn => btn.classList.remove('open'));
+    }
+
+    function renderRecentFiles() {
+      const el = document.getElementById('menu-recent-files');
+      if (!el) return;
+      el.innerHTML = FILES.filter(f => f.id !== 'readme' && f.id !== 'resume').map(f =>
+        `<button class="menu-dropdown-item" onclick="menuAction('open:${f.id}')">${f.name}</button>`
+      ).join('');
+    }
+
+    function menuAction(action) {
+      closeAllMenus();
+      switch (action) {
+        case 'newTab': {
+          const unopened = FILES.find(f => !openTabs.includes(f.id));
+          if (unopened) navigateTo(unopened.id);
+          break;
+        }
+        case 'openFile':
+          openCmd();
+          break;
+        case 'closeTab':
+          closeTab(activeFile);
+          break;
+        case 'closeAll':
+          openTabs = ['home'];
+          activeFile = 'home';
+          render();
+          break;
+        case 'resume':
+          triggerResumeDownload();
+          navigateTo('resume');
+          break;
+        case 'find':
+          openCmd();
+          break;
+        case 'selectAll': {
+          const content = document.getElementById('editor-content');
+          if (content) {
+            const range = document.createRange();
+            range.selectNodeContents(content);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+          }
+          break;
+        }
+        case 'copy': {
+          const sel = window.getSelection();
+          const textToCopy = sel.toString() || document.getElementById('editor-content')?.innerText || '';
+          navigator.clipboard.writeText(textToCopy);
+          showToast('Copied to clipboard!');
+          break;
+        }
+        case 'toggleSidebar':
+          sidebarOpen = !sidebarOpen;
+          document.getElementById("desktop-app").classList.toggle("sidebar-hidden", !sidebarOpen);
+          break;
+        case 'toggleTerminal':
+          toggleTerminal();
+          break;
+        case 'toggleCopilot':
+          toggleCopilot();
+          break;
+        case 'clearTerminal':
+          clearTerminal();
+          break;
+        case 'runCode':
+          showToast('▶ Executing code in browser environment...');
+          break;
+        default:
+          if (action.startsWith('open:')) {
+            navigateTo(action.replace('open:', ''));
+          }
+      }
+    }
+
+    // Toast notification
+    function showToast(msg) {
+      let toast = document.getElementById('app-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'app-toast';
+        toast.style.cssText = 'position:fixed;bottom:35px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--accent);color:var(--bright);padding:6px 16px;border-radius:4px;font-size:12px;z-index:99999;box-shadow:0 4px 16px rgba(0,0,0,0.5);pointer-events:none;transition:opacity 0.2s;';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+    }
+
+    // Interactive Terminal Logic
+    let terminalOpen = false;
+    function toggleTerminal() {
+      terminalOpen = !terminalOpen;
+      const term = document.getElementById('terminal-panel');
+      if (term) {
+        term.classList.toggle('open', terminalOpen);
+        if (terminalOpen) document.getElementById('term-input')?.focus();
+      }
+    }
+
+    function clearTerminal() {
+      const hist = document.getElementById('term-history');
+      if (hist) hist.innerHTML = '';
+    }
+
+    function handleTermSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('term-input');
+      const cmd = input.value.trim().toLowerCase();
+      if (!cmd) return;
+
+      const hist = document.getElementById('term-history');
+      const line = document.createElement('div');
+      line.className = 'term-line';
+      line.innerHTML = `<span class="term-prompt">hashir@portfolio:~$</span> <span class="term-cmd">${input.value}</span>`;
+      hist.appendChild(line);
+
+      const out = document.createElement('div');
+      out.className = 'term-line term-out';
+
+      if (cmd === 'help') {
+        out.innerHTML = `Available commands:<br>
+        • <span style="color:var(--blue)">whoami</span> — Display professional summary &amp; credentials<br>
+        • <span style="color:var(--blue)">projects</span> — List production projects &amp; architectural details<br>
+        • <span style="color:var(--blue)">skills</span> — View categorized technical skills &amp; frameworks<br>
+        • <span style="color:var(--blue)">experience</span> — Display engineering &amp; leadership track record<br>
+        • <span style="color:var(--blue)">education</span> — Show university education &amp; assessment scores<br>
+        • <span style="color:var(--blue)">certs</span> — View National Skill Competency Test (NSCT) details<br>
+        • <span style="color:var(--blue)">contact</span> — View direct contact channels<br>
+        • <span style="color:var(--blue)">cv</span> / <span style="color:var(--blue)">resume</span> — Download Muhammad Hashir's CV (PDF)<br>
+        • <span style="color:var(--blue)">git</span> — Check repository status &amp; branch<br>
+        • <span style="color:var(--blue)">theme [default|tokyo-night|catppuccin|nord]</span> — Switch editor theme<br>
+        • <span style="color:var(--blue)">clear</span> / <span style="color:var(--blue)">cls</span> — Clear terminal output buffer`;
+      } else if (cmd === 'whoami') {
+        out.innerHTML = `<strong>${OWNER.name}</strong> — ${OWNER.role}<br>
+        ${OWNER.subtitle} · ${OWNER.location}<br>
+        Specialization: Python, C# (.NET Core), Applied Machine Learning, Clean Architecture.`;
+      } else if (cmd === 'projects') {
+        out.innerHTML = PROJECTS.map(p => `• <strong>${p.name}</strong><br>&nbsp;&nbsp;[${p.type}]<br>&nbsp;&nbsp;${p.desc}<br>&nbsp;&nbsp;Stack: ${p.tags.join(', ')}`).join('<br><br>');
+        navigateTo('projects');
+      } else if (cmd === 'skills') {
+        out.innerHTML = `<strong>Core Competencies:</strong><br>
+        • Languages: Python (92%), C# (90%), SQL (88%), JavaScript (85%), C/C++ (82%), Bash (80%)<br>
+        • ML/Data: Scikit-learn (92%), Pandas &amp; NumPy (94%), TensorFlow &amp; Keras (88%), SHAP/LIME (85%)<br>
+        • Backend/Web: ASP.NET Core 9 (90%), FastAPI (88%), React (85%), Django/Flask (82%)<br>
+        • Databases: SQL Server (88%), EF Core (88%), SQLite (85%), MySQL (85%), MongoDB (78%)<br>
+        • Architecture: Clean Architecture (90%), TDD (88%), RESTful APIs (92%), Docker (80%)`;
+        navigateTo('skills');
+      } else if (cmd === 'experience') {
+        out.innerHTML = `<strong>Professional &amp; Leadership Track Record:</strong><br>
+        1. <strong>Teaching Assistant – Data Structures &amp; Algorithms</strong> @ FAST NUCES (Sep 2024 – May 2025)<br>
+        &nbsp;&nbsp;Mentored 150+ students with 95% satisfaction; led weekly debugging labs.<br>
+        2. <strong>Python Developer Intern</strong> @ Osoltech (Jun – Jul 2024)<br>
+        &nbsp;&nbsp;Automated ETL scripts, integrated REST APIs, and authored unit tests via TDD.<br>
+        3. <strong>President</strong> @ E-Gaming Society, FAST NUCES (Sep 2024 – Present)<br>
+        &nbsp;&nbsp;Directed 20+ members, executed 8 tournaments, secured PKR 30K+ sponsorships.<br>
+        4. <strong>Head of Media</strong> @ GDSC, FAST NUCES (Sep 2023 – May 2024)<br>
+        &nbsp;&nbsp;Led 8-member media team, produced 30+ campaign assets, increased attendance 45%.`;
+        navigateTo('experience');
+      } else if (cmd === 'education') {
+        out.innerHTML = `<strong>Academic Formation:</strong><br>
+        • <strong>BS in Computer Science</strong> (2022 — 2026)<br>
+        &nbsp;&nbsp;FAST – National University of Computer and Emerging Sciences (FAST NUCES), Peshawar<br>
+        &nbsp;&nbsp;Focus: Software Engineering &amp; Applied Machine Learning<br>
+        • <strong>FSC Pre-Engineering</strong> (2020 — 2022)<br>
+        &nbsp;&nbsp;Punjab Group of Colleges, Multan`;
+        navigateTo('about');
+      } else if (cmd === 'certs' || cmd === 'certifications') {
+        out.innerHTML = `<strong>Standardized Assessment:</strong><br>
+        • <strong>National Skill Competency Test (NSCT)</strong><br>
+        &nbsp;&nbsp;Tech Pakistan (HEC Recognized) · April 2026<br>
+        &nbsp;&nbsp;Score: 57/100 | National Percentile: 80.6th<br>
+        &nbsp;&nbsp;Verified in Algorithms, OOP Design, Databases, and Software Engineering.`;
+        navigateTo('about');
+      } else if (cmd === 'contact') {
+        out.innerHTML = `<strong>Contact Channels:</strong><br>
+        • Email: <a href="${OWNER.links.email}" style="color:var(--teal)">${OWNER.email}</a><br>
+        • Phone: <a href="${OWNER.links.phone}" style="color:var(--yellow)">${OWNER.phone}</a><br>
+        • LinkedIn: <a href="${OWNER.links.linkedin}" target="_blank" style="color:var(--blue)">linkedin.com/in/muhammad-hashir-chaudhary</a><br>
+        • GitHub: <a href="${OWNER.links.github}" target="_blank" style="color:var(--bright)">github.com/hashirch</a>`;
+        navigateTo('contact');
+      } else if (cmd === 'cv' || cmd === 'resume') {
+        out.textContent = 'Initiating curriculum vitae download...';
+        triggerResumeDownload();
+        navigateTo('resume');
+      } else if (cmd === 'git' || cmd === 'git status') {
+        out.innerHTML = `On branch <span style="color:var(--green)">main</span><br>
+        Your branch is up to date with 'origin/main'.<br>
+        Working tree clean · 8 project modules verified · All test suites passing.`;
+      } else if (cmd.startsWith('theme')) {
+        const tname = cmd.split(' ')[1];
+        if (['default','catppuccin','tokyo-night','nord'].includes(tname)) {
+          setTheme(tname);
+          out.textContent = `Switched theme to ${tname}`;
+        } else {
+          out.textContent = 'Available themes: default, catppuccin, tokyo-night, nord';
+        }
+      } else if (cmd === 'clear' || cmd === 'cls') {
+        clearTerminal();
+        input.value = '';
+        return;
+      } else {
+        out.textContent = `bash: command not found: ${cmd}. Type "help" for available system commands.`;
+      }
+      hist.appendChild(out);
+      input.value = '';
+      const body = document.getElementById('terminal-body');
+      if (body) body.scrollTop = body.scrollHeight;
+    }
+
+    // Attach click and hover to all menu triggers
+    document.querySelectorAll('.menu-trigger').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        toggleMenu(btn.dataset.menu);
+      });
+      btn.addEventListener('mouseenter', () => {
+        if (activeMenu && activeMenu !== btn.dataset.menu) {
+          toggleMenu(btn.dataset.menu);
+        }
+      });
+    });
+
+    /* ═══════════════════════════════════════════════ */
+    /*  EASTER EGGS                                   */
+    /* ═══════════════════════════════════════════════ */
+    const EASTER_EGGS = [
+      "// Notice: Portfolio workspace session is active and persistent.",
+      "// Info: Use Ctrl+P to quickly navigate project files and commands.",
+      "// Process: Background runtime active — buffer cannot be terminated.",
+      "// System: Open terminal with Ctrl+` to explore CLI commands.",
+      "// Info: Explore projects.js for detailed architecture breakdowns.",
+      "// Status: All modules verified. Session locked."
+    ];
+    let easterEggIdx = 0;
+    let easterEggTimer = null;
+
+    function triggerCloseEasterEgg() {
+      const el = document.getElementById('titlebar-easter-egg');
+      if (!el) return;
+      el.textContent = EASTER_EGGS[easterEggIdx % EASTER_EGGS.length];
+      easterEggIdx++;
+      el.classList.add('show');
+
+      const redDot = document.getElementById('dot-close');
+      if (redDot) {
+        redDot.classList.add('shake');
+        setTimeout(() => redDot.classList.remove('shake'), 400);
+      }
+
+      if (easterEggTimer) clearTimeout(easterEggTimer);
+      easterEggTimer = setTimeout(() => {
+        el.classList.remove('show');
+      }, 3500);
+    }
+
+    function triggerMinEasterEgg() {
+      const el = document.getElementById('titlebar-easter-egg');
+      if (!el) return;
+      el.textContent = "Minimized? Never! ⚡";
+      el.classList.add('show');
+      if (easterEggTimer) clearTimeout(easterEggTimer);
+      easterEggTimer = setTimeout(() => {
+        el.classList.remove('show');
+      }, 3000);
+    }
+
+    /* ═══════════════════════════════════════════════ */
+    /*  COPILOT AI CHAT ASSISTANT                     */
+    /* ═══════════════════════════════════════════════ */
+    let copilotOpen = false;
+
+    function toggleCopilot() {
+      copilotOpen = !copilotOpen;
+      if (isMobile) {
+        const modal = document.getElementById('copilot-modal');
+        if (modal) modal.classList.toggle('open', copilotOpen);
+        if (copilotOpen) document.getElementById('copilot-input')?.focus();
+      } else {
+        const app = document.getElementById('desktop-app');
+        if (app) app.classList.toggle('copilot-open', copilotOpen);
+        const abBtn = document.getElementById('ab-copilot');
+        if (abBtn) abBtn.classList.toggle('active', copilotOpen);
+        if (copilotOpen) {
+          document.getElementById('copilot-input-field')?.focus();
+        }
+      }
+    }
+
+    function clearCopilotChat() {
+      ['copilot-chat-history', 'copilot-messages'].forEach(id => {
+        const hist = document.getElementById(id);
+        if (hist) hist.innerHTML = '';
+      });
+      const welcome = document.getElementById('copilot-welcome');
+      if (welcome) welcome.style.display = 'flex';
+    }
+
+    function triggerResumeDownload() {
+      const pop = document.getElementById('downloads-popover');
+      if (pop) {
+        pop.classList.add('open');
+        setTimeout(() => pop.classList.remove('open'), 4500);
+      }
+
+      const a = document.createElement('a');
+      a.href = 'Hashir_cv.pdf';
+      a.download = 'Hashir_cv.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Initiated download: Hashir_cv.pdf');
+    }
+
+    function askCopilot(q) {
+      const welcome = document.getElementById('copilot-welcome');
+      if (welcome) welcome.style.display = 'none';
+      appendCopilotMsg(q, 'user');
+      setTimeout(() => {
+        let reply = "";
+        const lower = q.toLowerCase();
+        if (lower.includes('project') || lower.includes('ovula') || lower.includes('fyp') || lower.includes('sums') || lower.includes('phish') || lower.includes('credit')) {
+          reply = `<strong>Featured System Architectures:</strong><br><br>
+          1. <strong>Ovula – PCOS Tracker &amp; AI Healthcare Assistant (FYP)</strong><br>
+          • 87% diagnostic classification accuracy utilizing ensemble machine learning.<br>
+          • Cross-platform React &amp; CapacitorJS client backed by custom Android Kotlin native modules.<br>
+          • Asynchronous FastAPI backend integrated with a fine-tuned LLM voice assistant &amp; HIPAA-compliant encrypted storage.<br><br>
+          2. <strong>Smart University Management System (SUMS)</strong><br>
+          • Enterprise ERP built with C# and ASP.NET Core 9 adhering to Clean Architecture.<br>
+          • Cryptographic QR-code anti-duplicate attendance engine and automated state-machine petition workflows.<br>
+          • 47 unit and integration test cases executed via xUnit for high coverage.<br><br>
+          3. <strong>PhishShield-XAI (Cybersecurity &amp; XAI)</strong><br>
+          • Adversarial-resistant detection achieving sub-50ms inference latency with FastAPI.<br>
+          • Global and token-level model explainability using SHAP and LIME algorithms.<br><br>
+          4. <strong>Credit Risk ML Pipeline</strong>: Modular Scikit-learn pipeline with Joblib serialization.<br>
+          5. <strong>Speech Emotion Recognition</strong>: Audio feature extraction (Librosa) + hybrid CNN-LSTM network.<br><br>
+          Explore interactive details in the <a href='javascript:navigateTo("projects")' style='color:var(--blue);text-decoration:underline'>projects.js buffer</a>.`;
+        } else if (lower.includes('osoltech') || lower.includes('experience') || lower.includes('job') || lower.includes('work') || lower.includes('intern') || lower.includes('ta') || lower.includes('teaching')) {
+          reply = `<strong>Professional Engineering Track Record:</strong><br><br>
+          1. <strong>Teaching Assistant – Data Structures &amp; Algorithms</strong> @ FAST NUCES (Sep 2024 – May 2025):<br>
+          • Mentored 150+ undergraduate engineers across core CS courses with a 95% satisfaction rating.<br>
+          • Conducted weekly labs, resolved 50+ technical debugging queries in C++ and Python, and evaluated 3 concurrent course offerings.<br><br>
+          2. <strong>Python Developer Intern</strong> @ Osoltech (Jun – Jul 2024):<br>
+          • Automated critical data ingestion workflows via Python scripts, cutting manual processing time.<br>
+          • Integrated third-party RESTful APIs with strict JSON validation and fault-tolerant retry logic.<br>
+          • Practiced Test-Driven Development (TDD) using unittest and pytest, adhering to Agile sprints and GitFlow branching.<br><br>
+          Review full details in <a href='javascript:navigateTo("experience")' style='color:var(--yellow);text-decoration:underline'>experience.ts</a>.`;
+        } else if (lower.includes('tech') || lower.includes('stack') || lower.includes('skill') || lower.includes('tool') || lower.includes('language')) {
+          reply = `<strong>Technology Stack &amp; Specializations:</strong><br><br>
+          • <strong>Languages:</strong> Python, C# (.NET Core), SQL, JavaScript, C/C++, Bash, PHP<br>
+          • <strong>Machine Learning &amp; AI:</strong> Scikit-learn, TensorFlow, Keras, SHAP, LIME, Pandas, NumPy, Librosa, LLM Fine-Tuning<br>
+          • <strong>Backend &amp; Full-Stack:</strong> ASP.NET Core 9, FastAPI, Django, Flask, React, Node.js, CapacitorJS, Kotlin<br>
+          • <strong>Databases &amp; ORMs:</strong> SQL Server, Entity Framework Core, SQLite, MySQL, MongoDB<br>
+          • <strong>Architecture &amp; Quality:</strong> Clean Architecture, TDD (xUnit, pytest), RESTful APIs, Git, Docker, CI/CD<br><br>
+          Detailed proficiencies are mapped in <a href='javascript:navigateTo("skills")' style='color:var(--teal);text-decoration:underline'>skills.json</a>.`;
+        } else if (lower.includes('education') || lower.includes('fast') || lower.includes('university') || lower.includes('degree') || lower.includes('cert') || lower.includes('nsct')) {
+          reply = `<strong>Academic Credentials &amp; Certifications:</strong><br><br>
+          • <strong>Bachelor of Science in Computer Science (2022 — 2026)</strong><br>
+          FAST – National University of Computer and Emerging Sciences (FAST NUCES), Peshawar.<br>
+          Specialization: Software Engineering &amp; Applied Machine Learning.<br><br>
+          • <strong>National Skill Competency Test (NSCT)</strong><br>
+          Recognized by the Higher Education Commission (HEC) of Pakistan.<br>
+          Score: 57/100 · 80.6th National Percentile in core computer science &amp; engineering principles.<br><br>
+          • <strong>FSC Pre-Engineering (2020 — 2022)</strong>: Punjab Group of Colleges, Multan.`;
+        } else if (lower.includes('leader') || lower.includes('president') || lower.includes('gaming') || lower.includes('gdsc') || lower.includes('media')) {
+          reply = `<strong>Leadership &amp; Institutional Impact:</strong><br><br>
+          • <strong>President, E-Gaming Society @ FAST NUCES (Sep 2024 – Present):</strong><br>
+          Directed 20+ member cross-functional team, executed 8 campus tournaments, expanded membership by 40% (150 to 210), and secured PKR 30,000+ in corporate sponsorships.<br><br>
+          • <strong>Head of Media, GDSC @ FAST NUCES (Sep 2023 – May 2024):</strong><br>
+          Led 8-member creative team producing 30+ campaign assets, driving a 45% increase in campus event attendance.`;
+        } else if (lower.includes('contact') || lower.includes('email') || lower.includes('phone') || lower.includes('hire') || lower.includes('reach')) {
+          reply = `<strong>Direct Communication Channels:</strong><br><br>
+          • <strong>Email:</strong> <a href='mailto:hashirchbss@gmail.com' style='color:var(--teal)'>hashirchbss@gmail.com</a><br>
+          • <strong>Phone:</strong> <a href='tel:+923322226955' style='color:var(--yellow)'>+92 332 222 6955</a><br>
+          • <strong>LinkedIn:</strong> <a href='https://www.linkedin.com/in/muhammad-hashir-chaudhary-07225136b' target='_blank' style='color:var(--blue)'>linkedin.com/in/muhammad-hashir-chaudhary</a><br>
+          • <strong>GitHub:</strong> <a href='https://github.com/hashirch' target='_blank' style='color:var(--bright)'>github.com/hashirch</a><br><br>
+          Or submit an inquiry directly via <a href='javascript:navigateTo("contact")' style='color:var(--accent);text-decoration:underline'>contact.css</a>.`;
+        } else {
+          reply = `<strong>Muhammad Hashir</strong> is a Software Engineer from FAST NUCES specializing in Python, C# (.NET Core), Applied Machine Learning, and Clean Architecture.<br><br>
+          You can navigate through his portfolio modules:<br>
+          • <a href='javascript:navigateTo("about")' style='color:var(--blue)'>about.html</a> — Professional background &amp; education<br>
+          • <a href='javascript:navigateTo("projects")' style='color:var(--teal)'>projects.js</a> — Systems architecture &amp; ML pipelines<br>
+          • <a href='javascript:navigateTo("experience")' style='color:var(--yellow)'>experience.ts</a> — Industry &amp; leadership experience<br>
+          • <a href='javascript:navigateTo("resume")' style='color:var(--accent)'>Hashir_cv.pdf</a> — Curriculum vitae document`;
+        }
+        appendCopilotMsg(reply, 'bot');
+      }, 300);
+    }
+
+    function appendCopilotMsg(text, sender) {
+      ['copilot-chat-history', 'copilot-messages'].forEach(id => {
+        const container = document.getElementById(id);
+        if (!container) return;
+        const msg = document.createElement('div');
+        msg.className = `copilot-msg ${sender}`;
+        msg.innerHTML = text;
+        container.appendChild(msg);
+      });
+      const body = document.getElementById('copilot-body');
+      if (body) body.scrollTop = body.scrollHeight;
+      const modalMsgs = document.getElementById('copilot-messages');
+      if (modalMsgs) modalMsgs.scrollTop = modalMsgs.scrollHeight;
+    }
+
+    function handleCopilotSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('copilot-input-field');
+      const modalInput = document.getElementById('copilot-input');
+      const val = (input && input.value ? input.value : (modalInput ? modalInput.value : '')).trim();
+      if (!val) return;
+      askCopilot(val);
+      if (input) input.value = '';
+      if (modalInput) modalInput.value = '';
+    }
+
+    // Live clock updater
+    setInterval(() => {
+      const timeStr = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', hour12:false});
+      document.querySelectorAll('.statusbar-clock').forEach(el => el.textContent = timeStr);
+    }, 1000);
+
+    /* Events */
+    window.addEventListener('keydown',e=>{
+      const m=e.ctrlKey||e.metaKey;
+      if(m&&e.key==='p'){e.preventDefault();openCmd()}
+      if(m&&e.key==='b'){e.preventDefault();menuAction('toggleSidebar')}
+      if(m&&e.key==='t'){e.preventDefault();menuAction('newTab')}
+      if(m&&e.key==='w'){e.preventDefault();menuAction('closeTab')}
+      if(m&&e.key==='`'){e.preventDefault();menuAction('toggleTerminal')}
+      if(e.key==='Escape'){closeCmd();closeAllMenus();if(copilotOpen)toggleCopilot();closeSettings();closeGitPopover();}
+    });
+    document.getElementById("cmd-input").addEventListener('input',()=>{
+      cmdSelectedIndex=0;
+      renderCommandPalette();
+    });
+    document.getElementById("cmd-input").addEventListener('keydown',e=>{
+      const items=document.querySelectorAll('.cmd-item');
+      if(e.key==='ArrowDown'){
+        e.preventDefault();
+        cmdSelectedIndex=(cmdSelectedIndex+1)%(items.length||1);
+        updateCmdHighlight();
+      }else if(e.key==='ArrowUp'){
+        e.preventDefault();
+        cmdSelectedIndex=(cmdSelectedIndex-1+(items.length||1))%(items.length||1);
+        updateCmdHighlight();
+      }else if(e.key==='Enter'){
+        e.preventDefault();
+        const highlighted=document.querySelector(`.cmd-item[data-index="${cmdSelectedIndex}"]`);
+        if(highlighted){
+          execCommand(highlighted.dataset.action);
+        }else if(items.length>0){
+          execCommand(items[0].dataset.action);
+        }
+      }
+    });
+    document.getElementById("cmd-overlay").addEventListener('click',e=>{if(e.target===e.currentTarget)closeCmd()});
+    document.getElementById("mobile-menu-btn").addEventListener('click',openMobileNav);
+    document.getElementById("mobile-nav-overlay").addEventListener('click',closeMobileNav);
+    document.getElementById("mobile-search-btn").addEventListener('click',openCmd);
+    document.addEventListener('click',e=>{
+      // Close settings popover
+      if(settingsOpen&&!e.target.closest('#settings-popover')&&!e.target.closest('#ab-settings')&&!e.target.closest('.sb-theme-btn')){closeSettings()}
+      // Close git popover
+      if(gitPopoverOpen&&!e.target.closest('#git-popover')&&!e.target.closest('#ab-git')){closeGitPopover()}
+      // Close menus on outside click
+      if(!e.target.closest('.menu-item-wrap')){closeAllMenus()}
+    });
+    window.addEventListener('resize',()=>{const w=isMobile;isMobile=window.innerWidth<1024;if(w!==isMobile){typingInit=false;render()}});
+
+    // Attach explicit click handlers to titlebar dots
+    document.getElementById("dot-close")?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      triggerCloseEasterEgg();
+    });
+    document.getElementById("dot-min")?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      triggerMinEasterEgg();
+    });
+    document.getElementById("dot-max")?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleFullscreen();
+    });
+
+    render();initCursor();
+  </script>
+</body>
+</html>
