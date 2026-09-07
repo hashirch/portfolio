@@ -2575,13 +2575,35 @@
         setTimeout(() => pop.classList.remove('open'), 4500);
       }
 
-      const a = document.createElement('a');
-      a.href = 'Hashir_cv.pdf';
-      a.download = 'Hashir_cv.pdf';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast('Initiated download: Hashir_cv.pdf');
+      fetch('Hashir_cv.pdf')
+        .then(res => {
+          if (!res.ok) throw new Error('Network error');
+          return res.blob();
+        })
+        .then(blob => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = 'Hashir_cv.pdf';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          }, 200);
+          showToast('Downloaded: Hashir_cv.pdf');
+        })
+        .catch(() => {
+          const a = document.createElement('a');
+          a.href = 'Hashir_cv.pdf';
+          a.target = '_blank';
+          a.download = 'Hashir_cv.pdf';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          showToast('Opening Hashir_cv.pdf...');
+        });
     }
 
     function askCopilot(q) {
